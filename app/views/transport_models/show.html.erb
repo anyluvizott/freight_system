@@ -1,2 +1,21 @@
-# colocar os detalhes de cada modalidade
+<div>
+  <%= link_to 'Editar Modalidade', edit_transport_model_path(@transport_model)%>
+</div>
+
+<h1><%= @transport_model.name %></h1>
+<dl>
+  <dt>Distância Mínima Percorrida:</dt>
+  <dd><%= @transport_model.minimum_distance %>km</dd>
+  <dt>Distância Máxima Percorrida:</dt>
+  <dd><%= @transport_model.maximum_distance %>km</dd>
+  <dt>Peso Mínimo da Carga:</dt>
+  <dd><%= @transport_model.minimum_weight %>kg</dd>
+  <dt>Peso Máximo da Carga:</dt>
+  <dd><%= @transport_model.maximum_weight %>kg</dd>
+</dl>
+
+<div>
+  <%= link_to('Voltar', transport_models_path) %>
+</div>
+
 # colocar os veiculos cadastrados nessa modalidade

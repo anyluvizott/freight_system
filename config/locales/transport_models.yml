@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      transport_model: "Modalidade de Transporte"
+    attributes:
+      transport_model:
+        name: "Nome da Modalidade"
+        minimum_distance: "Distância Mínima"
+        maximum_distance: "Distância Máxima"
+        minimum_weight: "Peso Mínimo da Carga"
+        maximum_weight: "Peso Máximo da Carga"
