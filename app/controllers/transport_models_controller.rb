@@ -39,6 +39,6 @@ class TransportModelsController < ApplicationController
 
   def transport_model_params
     params.require(:transport_model).permit(:name, :minimum_distance, :maximum_distance, :minimum_weight,
-                                            :maximum_weight)
+                                            :maximum_weight, :tax)
   end
 end

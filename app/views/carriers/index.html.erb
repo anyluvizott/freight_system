@@ -1,0 +1,18 @@
+<h1>Veículos Cadastrados</h1>
+<div>
+  <%= link_to 'Cadastrar Novo Veículo', new_carrier_path %>
+</div>
+<div>
+  <% if @carriers.any? %>
+    <% @carriers.each do |carrier| %>
+      <div>
+        <dl>
+          <dt><%= link_to carrier.transport_model.name, carrier %> </dt>
+          <dd><%= carrier.drivers_name %> - <%= carrier.vehicle_model %> </dd>
+        </dl>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Nenhum Veículo Cadastrado.</p>
+  <% end %>
+</div>

@@ -3,6 +3,8 @@
 <div>
   <%= link_to 'Cadastrar Nova Modalidade de Transporte', new_transport_model_path %>
 </div>
+
+<div>
 <% if @transport_models.any? %>
   <% @transport_models.each do |model| %>
     <div>
@@ -12,3 +14,4 @@
   <% else %>
     <p>Nenhuma Modalidade de Transporte Cadastrada.</p>
   <% end %>
+</div>

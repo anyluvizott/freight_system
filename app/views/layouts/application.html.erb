@@ -10,9 +10,12 @@
   </head>
   <body>
     <header>
-      <h1>Transportadora AML</h1>
+      <%= link_to root_path do %>
+        <h1>Transportadora AML</h1>
+      <% end %>
       <nav>
         <%= link_to 'Modalidades de Transporte', transport_models_path%> |
+        <%= link_to 'Veículos Cadastrados', carriers_path%> |
       </nav>
     </header>
     <main>

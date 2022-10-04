@@ -14,6 +14,7 @@ describe 'Usúario cadastra uma nova modalidade de transporte' do
     expect(page).to have_field 'Distância Máxima'
     expect(page).to have_field 'Peso Mínimo da Carga'
     expect(page).to have_field 'Peso Máximo da Carga'
+    expect(page).to have_field 'Taxa Fixa de Entrega'
   end
 
   it 'com sucesso' do
@@ -28,6 +29,7 @@ describe 'Usúario cadastra uma nova modalidade de transporte' do
     fill_in 'Distância Máxima',	with: '600'
     fill_in 'Peso Mínimo da Carga',	with: '1'
     fill_in 'Peso Máximo da Carga',	with: '3000'
+    fill_in 'Taxa Fixa de Entrega',	with: '150'
     click_on 'Enviar'
 
     expect(page).to have_content 'Modalidade de Transporte cadastrada com sucesso'
@@ -35,7 +37,8 @@ describe 'Usúario cadastra uma nova modalidade de transporte' do
     expect(page).to have_content 'Distância Mínima Percorrida: 1km'
     expect(page).to have_content 'Distância Máxima Percorrida: 600km'
     expect(page).to have_content 'Peso Mínimo da Carga: 1kg'
-    expect(page).to have_content 'Peso Máximo da Carga: 3000'
+    expect(page).to have_content 'Peso Máximo da Carga: 3000kg'
+    expect(page).to have_content 'Taxa Fixa de Entrega: R$ 150,00'
   end
 
   it 'com dados incompletos' do
@@ -50,6 +53,7 @@ describe 'Usúario cadastra uma nova modalidade de transporte' do
     fill_in 'Distância Máxima',	with: ''
     fill_in 'Peso Mínimo da Carga',	with: ''
     fill_in 'Peso Máximo da Carga',	with: ''
+    fill_in 'Taxa Fixa de Entrega',	with: ''
     click_on 'Enviar'
 
     expect(page).to have_content 'Modalidade de Transporte não cadastrada'
@@ -57,5 +61,6 @@ describe 'Usúario cadastra uma nova modalidade de transporte' do
     expect(page).to have_content 'Distância Máxima não pode ficar em branco'
     expect(page).to have_content 'Peso Mínimo da Carga não pode ficar em branco'
     expect(page).to have_content 'Peso Máximo da Carga não pode ficar em branco'
+    expect(page).to have_content 'Taxa Fixa de Entrega não pode ficar em branco'
   end
 end
