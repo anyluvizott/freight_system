@@ -1,0 +1,28 @@
+<div>
+  <%= link_to 'Editar Veículo', edit_carrier_path(@carrier)%>
+</div>
+
+<h1><%= @carrier.transport_model.name %></h1>
+
+<dl>
+  <dt>Nome do Motorista:</dt>
+  <dd><%= @carrier.drivers_name %></dd>
+
+  <dt>Placa de Identificação:</dt>
+  <dd><%= @carrier.nameplate %></dd>
+
+  <dt>Modelo do Veículo:</dt>
+  <dd><%= @carrier.vehicle_model %></dd>
+
+  <dt>Marca do Veículo:</dt>
+  <dd><%= @carrier.vehicle_brand %></dd>
+
+  <dt>Ano de Fabricação:</dt>
+  <dd><%= @carrier.year_of_manufacture %></dd>
+
+  <dt>Peso Máximo da Carga:</dt>
+  <dd><%= @carrier.maximum_weight %>kg</dd>
+
+<div>
+  <%= link_to('Voltar', carriers_path) %>
+</div>

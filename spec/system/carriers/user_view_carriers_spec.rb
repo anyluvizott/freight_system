@@ -32,6 +32,9 @@ describe 'Usuário vê os veículos cadastrados' do
   end
 
   it 'e não existem veículos cadastrados' do
-    # Nenhum Veículo Cadastrado.
+    visit root_path
+    click_on 'Veículos Cadastrados'
+
+    expect(page).to have_content 'Nenhum Veículo Cadastrado.'
   end
 end

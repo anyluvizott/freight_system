@@ -44,8 +44,8 @@ moto2 = Carrier.create!(drivers_name: 'Gabriela Almeida', nameplate: 'JKL6S15',
 
 bike1 = Carrier.create!(drivers_name: 'Marcelo Ferreira', nameplate: nil,
                 vehicle_model: 'Bicicleta Cargueira Aro 26', vehicle_brand: 'Samy',
-                year_of_manufacture: nil, maximum_weight: 40, transport_model: transp4)
+                year_of_manufacture: 2010, maximum_weight: 40, transport_model: transp4)
 
 bike2 = Carrier.create!(drivers_name: 'Josevaldo da Silva', nameplate: nil,
                 vehicle_model: 'Bicicleta Cargueira Aro 26', vehicle_brand: 'Samy',
-                year_of_manufacture: nil, maximum_weight: 40, transport_model: transp4)
+                year_of_manufacture: 2010, maximum_weight: 40, transport_model: transp4)
