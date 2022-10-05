@@ -16,8 +16,13 @@
   <dd>R$ <%= @transport_model.tax %>,00</dd>
 </dl>
 
+<h2>Veículos Cadastrados nessa Modalidade:</h2>
+<% @transport_model.carriers.each do |carrier| %>
+<div>
+<%= carrier.drivers_name %> - <%= carrier.vehicle_model %> <%= carrier.nameplate %>
+</div>
+<% end %>
+
 <div>
   <%= link_to('Voltar', transport_models_path) %>
 </div>
-
-# colocar os veiculos cadastrados nessa modalidade
