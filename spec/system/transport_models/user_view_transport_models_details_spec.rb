@@ -2,9 +2,13 @@ require 'rails_helper'
 
 describe 'Usuário vê detalhes das modalidades de transporte' do
   it 'a partir da tela inicial' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
     TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
                            minimum_weight: 1, maximum_weight: 3_000, tax: 150)
 
+    login_as(admin)
     visit root_path
     within('nav') do
       click_on 'Modalidades de Transporte'
@@ -20,9 +24,13 @@ describe 'Usuário vê detalhes das modalidades de transporte' do
   end
 
   it 'e volta para a tela inicial' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
     TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
                            minimum_weight: 1, maximum_weight: 3_000, tax: 150)
 
+    login_as(admin)
     visit root_path
     within('nav') do
       click_on 'Modalidades de Transporte'

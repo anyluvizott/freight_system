@@ -2,7 +2,10 @@ require 'rails_helper'
 
 describe 'Usúario cadastra uma nova modalidade de transporte' do
   it 'a partir do menu' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
 
+    login_as(admin)
     visit root_path
     within('nav') do
       click_on 'Modalidades de Transporte'
@@ -18,7 +21,10 @@ describe 'Usúario cadastra uma nova modalidade de transporte' do
   end
 
   it 'com sucesso' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
 
+    login_as(admin)
     visit root_path
     within('nav') do
       click_on 'Modalidades de Transporte'
@@ -42,7 +48,10 @@ describe 'Usúario cadastra uma nova modalidade de transporte' do
   end
 
   it 'com dados incompletos' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
 
+    login_as(admin)
     visit root_path
     within('nav') do
       click_on 'Modalidades de Transporte'

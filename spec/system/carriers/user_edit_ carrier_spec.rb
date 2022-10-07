@@ -2,12 +2,16 @@ require 'rails_helper'
 
 describe 'Usuário edita um veículo cadastrado' do
   it 'a partir do menu' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
     transp = TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
                                     minimum_weight: 1, maximum_weight: 3_000, tax: 150)
     truck = Carrier.create!(drivers_name: 'Fernando Mendes', nameplate: 'BCG5L88',
                             vehicle_model: 'Hyundai/HR 2.5 TCI 4x2 - Diesel', vehicle_brand: 'Hyundai',
                             year_of_manufacture: 2016, maximum_weight: 3_000, transport_model: transp)
 
+    login_as(admin)
     visit root_path
     click_on 'Veículos Cadastrados'
     click_on 'Rodoviário - Caminhão'
@@ -23,12 +27,16 @@ describe 'Usuário edita um veículo cadastrado' do
   end
 
   it 'com sucesso' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
     transp = TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
                                     minimum_weight: 1, maximum_weight: 3_000, tax: 150)
     truck = Carrier.create!(drivers_name: 'Fernando Mendes', nameplate: 'BCG5L88',
                             vehicle_model: 'Hyundai/HR 2.5 TCI 4x2 - Diesel', vehicle_brand: 'Hyundai',
                             year_of_manufacture: 2016, maximum_weight: 3_000, transport_model: transp)
 
+    login_as(admin)
     visit root_path
     click_on 'Veículos Cadastrados'
     click_on 'Rodoviário - Caminhão'
@@ -46,12 +54,16 @@ describe 'Usuário edita um veículo cadastrado' do
   end
 
   it 'e mantém os campos obrigatórios' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
     transp = TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
                                     minimum_weight: 1, maximum_weight: 3_000, tax: 150)
     truck = Carrier.create!(drivers_name: 'Fernando Mendes', nameplate: 'BCG5L88',
                             vehicle_model: 'Hyundai/HR 2.5 TCI 4x2 - Diesel', vehicle_brand: 'Hyundai',
                             year_of_manufacture: 2016, maximum_weight: 3_000, transport_model: transp)
 
+    login_as(admin)
     visit root_path
     click_on 'Veículos Cadastrados'
     click_on 'Rodoviário - Caminhão'

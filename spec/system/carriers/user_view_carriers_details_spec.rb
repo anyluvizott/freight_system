@@ -2,6 +2,9 @@ require 'rails_helper'
 
 describe 'Usuário vê detalhes dos veículos cadastrados' do
   it 'a partir da tela inicial' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
     transp = TransportModel.create!(name: 'Rodoviário - Utilitários', minimum_distance: 1, maximum_distance: 150,
                                     minimum_weight: 100, maximum_weight: 2_000, tax: 50)
 
@@ -9,6 +12,7 @@ describe 'Usuário vê detalhes dos veículos cadastrados' do
                             vehicle_model: 'Renault Master 2.3 DCI Furgão L1H1 - Diesel', vehicle_brand: 'Renault',
                             year_of_manufacture: 2019, maximum_weight: 1_500, transport_model: transp)
 
+    login_as(admin)
     visit root_path
     click_on 'Veículos Cadastrados'
     click_on 'Rodoviário - Utilitários'
@@ -24,6 +28,9 @@ describe 'Usuário vê detalhes dos veículos cadastrados' do
   end
 
   it 'e volta para a tela inicial' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
     transp = TransportModel.create!(name: 'Rodoviário - Utilitários', minimum_distance: 1, maximum_distance: 150,
                                     minimum_weight: 100, maximum_weight: 2_000, tax: 50)
 
@@ -31,6 +38,7 @@ describe 'Usuário vê detalhes dos veículos cadastrados' do
                             vehicle_model: 'Renault Master 2.3 DCI Furgão L1H1 - Diesel', vehicle_brand: 'Renault',
                             year_of_manufacture: 2019, maximum_weight: 1_500, transport_model: transp)
 
+    login_as(admin)
     visit root_path
     click_on 'Veículos Cadastrados'
     click_on 'Rodoviário - Utilitários'

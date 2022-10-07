@@ -2,9 +2,13 @@ require 'rails_helper'
 
 describe 'Usuário edita uma modalidade de transporte' do
   it 'a partir da página de detalhes' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
     TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
                            minimum_weight: 1, maximum_weight: 3_000, tax: 150)
 
+    login_as(admin)
     visit root_path
     within('nav') do
       click_on 'Modalidades de Transporte'
@@ -22,9 +26,13 @@ describe 'Usuário edita uma modalidade de transporte' do
   end
 
   it 'com sucesso' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
     TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
                            minimum_weight: 1, maximum_weight: 3_000, tax: 150)
 
+    login_as(admin)
     visit root_path
     within('nav') do
       click_on 'Modalidades de Transporte'
@@ -45,9 +53,13 @@ describe 'Usuário edita uma modalidade de transporte' do
   end
 
   it 'e mantém os campos obrigatórios' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
     TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
                            minimum_weight: 1, maximum_weight: 3_000, tax: 150)
 
+    login_as(admin)
     visit root_path
     within('nav') do
       click_on 'Modalidades de Transporte'

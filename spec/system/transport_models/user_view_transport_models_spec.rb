@@ -4,12 +4,16 @@ require 'rails_helper'
 
 describe 'Usuário visita a tela de modalidades' do
   it 'e vê as modalidades de transporte' do
-    TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
-                              minimum_weight: 1, maximum_weight: 3_000, tax: 150)
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
 
+    TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
+                           minimum_weight: 1, maximum_weight: 3_000, tax: 150)
+
+    login_as(admin)
     visit root_path
     within('nav') do
-    click_on 'Modalidades de Transporte'
+      click_on 'Modalidades de Transporte'
     end
 
     expect(page).not_to have_content 'Nenhuma Modalidade de Transporte Cadastrada'
@@ -19,7 +23,11 @@ describe 'Usuário visita a tela de modalidades' do
   end
 
   it 'e não existem modalidades de transporte cadastradas' do
-    visit root_path 
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
+    login_as(admin)
+    visit root_path
     click_on 'Modalidades de Transporte'
 
     expect(page).to have_content 'Cadastrar Nova Modalidade de Transporte'

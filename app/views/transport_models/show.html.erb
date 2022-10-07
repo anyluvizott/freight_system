@@ -1,7 +1,11 @@
-<div>
-  <%= link_to 'Editar Modalidade', edit_transport_model_path(@transport_model)%>
-</div>
-
+<hr/>
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <div>
+      <%= link_to 'Editar Modalidade', edit_transport_model_path(@transport_model)%>
+    </div>
+  <% end %>
+<% end %>
 <h1><%= @transport_model.name %></h1>
 <dl>
   <dt>Distância Mínima Percorrida:</dt>
@@ -15,14 +19,12 @@
   <dt>Taxa Fixa de Entrega:</dt>
   <dd>R$ <%= @transport_model.tax %>,00</dd>
 </dl>
-
 <h2>Veículos Cadastrados nessa Modalidade:</h2>
 <% @transport_model.carriers.each do |carrier| %>
-<div>
-<%= carrier.drivers_name %> - <%= carrier.vehicle_model %> <%= carrier.nameplate %>
-</div>
+  <div>
+    <%= carrier.drivers_name %> - <%= carrier.vehicle_model %> <%= carrier.nameplate %>
+  </div>
 <% end %>
-
 <div>
   <%= link_to('Voltar', transport_models_path) %>
 </div>

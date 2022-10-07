@@ -2,6 +2,10 @@ require 'rails_helper'
 
 describe 'Usúario cadastra um novo veículo' do
   it 'a partir do menu' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
+    login_as(admin)
     visit root_path
     click_on 'Veículos Cadastrados'
     click_on 'Cadastrar Novo Veículo'
@@ -17,11 +21,15 @@ describe 'Usúario cadastra um novo veículo' do
   end
 
   it 'com sucesso' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
     transp = TransportModel.create!(name: 'Rodoviário - Utilitários', minimum_distance: 1, maximum_distance: 150,
                                     minimum_weight: 100, maximum_weight: 2_000, tax: 50)
     transp1 = TransportModel.create!(name: 'Rodoviário - Bicicleta', minimum_distance: 1, maximum_distance: 15,
                                      minimum_weight: 1, maximum_weight: 40, tax: 10)
 
+    login_as(admin)
     visit root_path
     click_on 'Veículos Cadastrados'
     click_on 'Cadastrar Novo Veículo'
@@ -46,6 +54,10 @@ describe 'Usúario cadastra um novo veículo' do
   end
 
   it 'com dados incompletos' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
+    login_as(admin)
     visit root_path
     click_on 'Veículos Cadastrados'
     click_on 'Cadastrar Novo Veículo'

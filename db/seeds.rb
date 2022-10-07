@@ -1,12 +1,18 @@
+# Criando Usuário Regular e Administrador
+
+admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador', status: :admin)
+
+regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular', status: :regular)
+
 # Criando algumas modalidades de transporte de exemplo:
 
-transp1 = TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
+transp1 = TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 1000,
                                  minimum_weight: 1, maximum_weight: 3_000, tax: 150)
 
-transp2 = TransportModel.create!(name: 'Rodoviário - Utilitários', minimum_distance: 1, maximum_distance: 150,
+transp2 = TransportModel.create!(name: 'Rodoviário - Utilitários', minimum_distance: 1, maximum_distance: 500,
                                  minimum_weight: 100, maximum_weight: 2_000, tax: 50)
 
-transp3 = TransportModel.create!(name: 'Rodoviário - Motocicleta', minimum_distance: 1, maximum_distance: 50,
+transp3 = TransportModel.create!(name: 'Rodoviário - Motocicleta', minimum_distance: 1, maximum_distance: 200,
                                  minimum_weight: 1, maximum_weight: 300, tax: 20)
 
 transp4 = TransportModel.create!(name: 'Rodoviário - Bicicleta', minimum_distance: 1, maximum_distance: 15,
@@ -49,3 +55,4 @@ bike1 = Carrier.create!(drivers_name: 'Marcelo Ferreira', nameplate: nil,
 bike2 = Carrier.create!(drivers_name: 'Josevaldo da Silva', nameplate: nil,
                 vehicle_model: 'Bicicleta Cargueira Aro 26', vehicle_brand: 'Samy',
                 year_of_manufacture: 2010, maximum_weight: 40, transport_model: transp4)
+
