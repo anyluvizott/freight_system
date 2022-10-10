@@ -1,6 +1,11 @@
-<div>
-  <%= link_to 'Editar Veículo', edit_carrier_path(@carrier)%>
-</div>
+<hr/>
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <div>
+       <%= link_to 'Editar Veículo', edit_carrier_path(@carrier)%>
+    </div>
+  <% end %>
+<% end %>
 
 <h1><%= @carrier.transport_model.name %></h1>
 

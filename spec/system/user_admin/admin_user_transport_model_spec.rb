@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuario Administrador tem acesso a lista de Modelos de Transporte' do
+describe 'Usuario Administrador tem acesso a lista de Modalidades de Transporte' do
   it 'a partir do menu' do
     admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
                          status: :admin)
@@ -20,7 +20,7 @@ describe 'Usuario Administrador tem acesso a lista de Modelos de Transporte' do
     expect(page).to have_content 'Rodoviário - Utilitários'
   end
 
-  it 'e tem acesso ao cadastro das modalidades de tranporte' do
+  it 'e tem acesso ao cadastro das Modalidades de Tranporte' do
     admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
                          status: :admin)
 
@@ -46,7 +46,7 @@ describe 'Usuario Administrador tem acesso a lista de Modelos de Transporte' do
   end
 end
 
-describe 'Usuario Administrador tem acesso aos detalhes das Modelos de Transporte' do
+describe 'Usuario Administrador tem acesso aos detalhes da Modalidade de Transporte' do
   it 'a partir do menu' do
     admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
                          status: :admin)
@@ -68,7 +68,7 @@ describe 'Usuario Administrador tem acesso aos detalhes das Modelos de Transport
     expect(page).to have_link 'Voltar'
   end
 
-  it 'e tem acesso a edição da Modalidade de Tranporte' do
+  it 'e tem acesso a edição dos detalhes da Modalidade de Tranporte' do
     admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
                          status: :admin)
 

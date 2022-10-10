@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, presence: true
-  #validates :email, format: {with: \^[a-z0-9.]+@sistemadefrete+\.com+\.(br)/}
+  validates :email, format: {with: /\A[a-z0-9.]+@sistemadefrete+\.com+\.br/}
 
   enum status: { regular: 0, admin: 5 }
 

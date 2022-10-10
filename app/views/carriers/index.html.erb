@@ -1,7 +1,12 @@
 <h1>Veículos Cadastrados</h1>
-<div>
-  <%= link_to 'Cadastrar Novo Veículo', new_carrier_path %>
-</div>
+<hr/>
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <div>
+      <%= link_to 'Cadastrar Novo Veículo', new_carrier_path %>
+    </div>
+  <% end %>
+<% end %>
 <div>
   <% if @carriers.any? %>
     <% @carriers.each do |carrier| %>
