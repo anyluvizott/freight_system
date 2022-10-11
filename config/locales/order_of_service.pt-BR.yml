@@ -1,6 +1,6 @@
 pt-BR:
   pending: "Pendente"
-  on_delivery: "Em Entrega"
+  on_route: "Em Rota de Entrega"
   delivered: "Entregue"
   activerecord:
     models:

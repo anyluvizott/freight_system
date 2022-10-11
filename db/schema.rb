@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_10_221238) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_11_182746) do
   create_table "carriers", force: :cascade do |t|
     t.string "drivers_name"
     t.string "nameplate"
@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_10_221238) do
     t.integer "transport_model_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["transport_model_id"], name: "index_carriers_on_transport_model_id"
   end
 

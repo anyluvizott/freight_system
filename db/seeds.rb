@@ -78,3 +78,10 @@ order_five = OrderOfService.create!(full_sender_address: 'Galpão Surf & Praia -
                                     product_length: 100, product_width: 100, product_height: 100,
                                     recipient_full_address: 'Rua das Formigas, 100 - Florianópolis SC', recipients_name: 'Joana Siqueira',
                                     distance: 315, product_weight: 30)
+
+# Criando tabela de preço por peso:
+first_line = PriceByWeight.create!(starting_weight: 0, final_weight: 10, price_per_km: 0.50)
+second_line = PriceByWeight.create!(starting_weight: 11, final_weight: 50, price_per_km: 0.80)
+third_line = PriceByWeight.create!(starting_weight: 51, final_weight: 100, price_per_km: 1.10)
+fourth_line = PriceByWeight.create!(starting_weight: 101, final_weight: 1000, price_per_km: 1.75)
+fifth_line = PriceByWeight.create!(starting_weight: 1000, final_weight: 3000, price_per_km: 2.10)

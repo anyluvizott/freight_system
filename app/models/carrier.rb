@@ -5,4 +5,6 @@ class Carrier < ApplicationRecord
   validates :year_of_manufacture, :maximum_weight, numericality: { only_integer: true, greater_than: 0 }
   validates :year_of_manufacture, length: { is: 4 }
 
+  enum status: { active: 0, on_delivery: 5, under_maintenance: 9 }
+
 end

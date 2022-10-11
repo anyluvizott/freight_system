@@ -5,7 +5,7 @@ class OrderOfService < ApplicationRecord
   validates :product_height, :product_width, :product_length, :product_weight, :distance,
             numericality: { only_integer: true, greater_than: 0 }
             
-  enum status: { pending: 0, on_delivery: 5, delivered: 9 }
+  enum status: { pending: 0, on_route: 5, delivered: 9 }
 
   before_validation :generate_order_service_code, on: :create
   before_validation :generate_product_code, on: :create

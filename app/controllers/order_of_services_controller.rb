@@ -29,7 +29,7 @@ class OrderOfServicesController < ApplicationController
   def update
     @order_of_service = OrderOfService.find(params[:id])
 
-    if order_of_service.update(order_of_service_params)
+    if @order_of_service.update(order_of_service_params)
       redirect_to @order_of_service, notice: 'Ordem de Serviço Atualizada'
     else
       flash.now[:alert] = 'Não foi possível atualizar Ordem de Serviço'

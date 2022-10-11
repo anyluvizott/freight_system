@@ -1,0 +1,28 @@
+<h1>Tabela de Preço por Peso</h1>
+
+
+<table>
+  <tr>
+    <td> Peso Inicial </td>
+    <td> Peso Final </td>
+    <td> Valor por KM </td>
+  </tr>
+  <% @price_by_weights.each do |pw|%>
+    <tr>
+      <td><%= pw.starting_weight %> kg</td>
+      <td><%= pw.final_weight %> kg</td>
+      <td><%= number_to_currency(pw.price_per_km) %></td>
+    </tr>
+  <% end %>
+</table>
+
+
+<hr/>
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+
+    <h3>Adicionar Novos Valores à Tabela:</h3>
+    <%= render 'form' %>
+    
+  <% end %>
+<% end %>

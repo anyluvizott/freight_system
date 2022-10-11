@@ -1,4 +1,7 @@
 pt-BR:
+  active: "Ativo"
+  on_delivery: "Em Entrega"
+  under_maintenance: "Em Manutenção"
   activerecord:
     models:
       carrier:
