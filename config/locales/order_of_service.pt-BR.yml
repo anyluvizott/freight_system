@@ -1,0 +1,21 @@
+pt-BR:
+  pending: "Pendente"
+  on_delivery: "Em Entrega"
+  delivered: "Entregue"
+  activerecord:
+    models:
+      order_of_service:
+        one: "Ordem de Serviço"
+        other: "Ordens de Serviço"
+    attributes:
+      order_of_service:
+        full_sender_address: "Endereço Completo de Saída"
+        product_code: "Código do Produto"
+        product_height: "Altura do Produto em cm"
+        product_width: "Largura do Produto em cm"
+        product_length: "Comprimento do Produto em cm"
+        recipient_full_address: "Endereço Completo do Destinatário"
+        recipients_name: "Nome do Destinatário"
+        order_service_code: "Código da Ordem de Serviço"
+        distance: "Distância em km"
+        product_weight: "Peso do Produto em kg"

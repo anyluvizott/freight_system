@@ -1,0 +1,2 @@
+class PriceByWeight < ApplicationRecord
+end

@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      price_by_weight: "Preço por Peso"
+    attributes:
+      price_by_weight:
+        starting_weight: "Peso Inicial"
+        final_weight: "Peso Final"
+        price_per_km: "Preço por Km"

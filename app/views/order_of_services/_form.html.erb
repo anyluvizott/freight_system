@@ -1,0 +1,46 @@
+<% if(@order_of_service.errors.any?) %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @order_of_service.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: @order_of_service) do |f| %>
+  <div>
+    <%= f.label :full_sender_address %>
+    <%= f.text_field :full_sender_address %>
+  </div>
+  <div>
+    <%= f.label :product_weight %>
+    <%= f.number_field :product_weight %>
+  </div>
+  <div>
+    <%= f.label :product_height %>
+    <%= f.number_field :product_height %>
+  </div>
+  <div>
+    <%= f.label :product_width %>
+    <%= f.number_field :product_width %>
+  </div>
+  <div>
+    <%= f.label :product_length %>
+    <%= f.number_field :product_length %>
+  </div>
+  <div>
+    <%= f.label :recipient_full_address %>
+    <%= f.text_field :recipient_full_address %>
+  </div>
+  <div>
+    <%= f.label :recipients_name %>
+    <%= f.text_field :recipients_name %>
+  </div>
+  <div>
+    <%= f.label :distance %>
+    <%= f.number_field :distance %>
+  </div>
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>

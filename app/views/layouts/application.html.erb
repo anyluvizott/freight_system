@@ -14,17 +14,15 @@
         <h1>Transportadora AML</h1>
       <% end %>
       <nav>
+        <%= link_to 'Ordem de Serviço', order_of_services_path %> |
         <%= link_to 'Modalidades de Transporte', transport_models_path%> |
         <%= link_to 'Veículos Cadastrados', carriers_path%> |
-        
         <% if user_signed_in? %>
-        <%= current_user.user %> |
-        <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
-<% else %>
-        <%= link_to 'Entrar', new_user_session_path %>
-        
+          <%= current_user.user %> |
+          <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to 'Entrar', new_user_session_path %>
         <% end %>
-        
       </nav>
     </header>
     <main>
