@@ -1,0 +1,2 @@
+class PricePerDistance < ApplicationRecord
+end

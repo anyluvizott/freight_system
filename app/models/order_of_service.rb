@@ -10,6 +10,10 @@ class OrderOfService < ApplicationRecord
   before_validation :generate_order_service_code, on: :create
   before_validation :generate_product_code, on: :create
 
+  has_one :start_service_order
+  has_one :carrier, through: :start_service_order
+  has_one :transport_model, through: :start_service_order
+  
   private
 
   def generate_order_service_code

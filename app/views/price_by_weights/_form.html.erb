@@ -1,4 +1,4 @@
-<% if(@price_by_weight.errors.any?) %>
+    <% if(@price_by_weight.errors.any?) %>
   <p>Verifique os erros abaixo:</p>
   <ul>
     <% @price_by_weight.errors.full_messages.each do |msg| %>
@@ -6,36 +6,18 @@
     <% end %>
   </ul>
 <% end %>
-
-
-<%= form_with(model: @carrier) do |f| %>
+<%= form_with(model: @price_by_weight) do |f| %>
   <div>
-    <%= f.label :drivers_name %>
-    <%= f.text_field :drivers_name %>
+    <%= f.label :starting_weight %>
+    <%= f.number_field :starting_weight %>
   </div>
   <div>
-    <%= f.label :nameplate %>
-    <%= f.text_field :nameplate %>
+    <%= f.label :final_weight %>
+    <%= f.number_field :final_weight %>
   </div>
   <div>
-    <%= f.label :vehicle_model %>
-    <%= f.text_field :vehicle_model %>
-  </div>
-  <div>
-    <%= f.label :vehicle_brand %>
-    <%= f.text_field :vehicle_brand %>
-  </div>
-  <div>
-    <%= f.label :year_of_manufacture %>
-    <%= f.number_field :year_of_manufacture %>
-  </div>
-  <div>
-    <%= f.label :maximum_weight %>
-    <%= f.number_field :maximum_weight %>
-  </div>
-  <div>
-    <%= f.label :transport_model_id %>
-    <%= f.collection_select :transport_model_id, @transport_models, :id, :name%>
+    <%= f.label :price_per_km %>
+    <%= f.number_field :price_per_km, step: :any %>
   </div>
   <div>
     <%= f.submit 'Enviar' %>

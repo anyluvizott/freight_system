@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_11_182746) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_12_203538) do
   create_table "carriers", force: :cascade do |t|
     t.string "drivers_name"
     t.string "nameplate"
@@ -49,6 +49,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_11_182746) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "price_per_distances", force: :cascade do |t|
+    t.integer "starting_km"
+    t.integer "final_km"
+    t.decimal "fixed_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "start_service_orders", force: :cascade do |t|
+    t.integer "order_of_service_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "carrier_id", null: false
+    t.string "delivery_type"
+    t.index ["carrier_id"], name: "index_start_service_orders_on_carrier_id"
+    t.index ["order_of_service_id"], name: "index_start_service_orders_on_order_of_service_id"
+  end
+
   create_table "transport_models", force: :cascade do |t|
     t.string "name"
     t.integer "minimum_distance"
@@ -75,4 +93,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_11_182746) do
   end
 
   add_foreign_key "carriers", "transport_models"
+  add_foreign_key "start_service_orders", "carriers"
+  add_foreign_key "start_service_orders", "order_of_services"
 end

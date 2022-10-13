@@ -1,6 +1,4 @@
 <h1>Tabela de Preço por Peso</h1>
-
-
 <table>
   <tr>
     <td> Peso Inicial </td>
@@ -12,17 +10,18 @@
       <td><%= pw.starting_weight %> kg</td>
       <td><%= pw.final_weight %> kg</td>
       <td><%= number_to_currency(pw.price_per_km) %></td>
-    </tr>
+      <% if user_signed_in? %>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Editar', pw %>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <hr/>
+  <% if user_signed_in? %>
+    <% if current_user.admin? %>
+      <h3>Adicionar Novos Valores à Tabela:</h3>
+      <%= render 'form' %>
+    <% end %>
   <% end %>
-</table>
-
-
-<hr/>
-<% if user_signed_in? %>
-  <% if current_user.admin? %>
-
-    <h3>Adicionar Novos Valores à Tabela:</h3>
-    <%= render 'form' %>
-    
-  <% end %>
-<% end %>

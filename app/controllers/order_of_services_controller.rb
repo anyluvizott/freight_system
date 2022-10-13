@@ -5,6 +5,8 @@ class OrderOfServicesController < ApplicationController
 
   def show
     @order_of_service = OrderOfService.find(params[:id])
+    @start_service_order = StartServiceOrder.new
+    @carriers = select_carriers
   end
 
   def new
@@ -43,5 +45,17 @@ class OrderOfServicesController < ApplicationController
     params.require(:order_of_service).permit(:full_sender_address, :product_height, :product_width,
                                              :product_length, :recipient_full_address, :recipients_name,
                                              :distance, :product_weight)
+  end
+
+  def select_carriers
+    select_carriers = []
+    carriers = Carrier.where('maximum_weight >= ?', @order_of_service.product_weight)
+
+    carriers.each do |var|
+      if var.transport_model.minimum_weight <= @order_of_service.product_weight.to_i && var.transport_model.minimum_distance <= @order_of_service.distance && var.transport_model.maximum_distance >= @order_of_service.distance
+        select_carriers << var
+      end
+    end
+    return select_carriers
   end
 end

@@ -1,0 +1,27 @@
+<h1>Tabela de Preço por Distância</h1>
+<table>
+  <tr>
+    <td> Distância Inicial </td>
+    <td> Distância Final </td>
+    <td> Preço Fixo </td>
+  </tr>
+  <% @price_per_distances.each do |pd|%>
+    <tr>
+      <td><%= pd.starting_km %> km</td>
+      <td><%= pd.final_km %> km</td>
+      <td><%= number_to_currency(pd.fixed_price) %></td>
+      <% if user_signed_in? %>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Editar', pd %>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <hr/>
+  <% if user_signed_in? %>
+    <% if current_user.admin? %>
+      <h3>Adicionar Novos Valores à Tabela:</h3>
+      <%= render 'form' %>
+    <% end %>
+  <% end %>

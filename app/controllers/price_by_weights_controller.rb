@@ -22,4 +22,6 @@ class PriceByWeightsController < ApplicationController
 
   def price_by_weights_params
     params.require(:price_by_weight).permit(:starting_weight, :final_weight, :price_per_km)
+  end
+  
 end

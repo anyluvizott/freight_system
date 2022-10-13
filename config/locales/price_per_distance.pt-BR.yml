@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      price_per_distance: "Preço por Distância"
+    attributes:
+      price_per_distance:
+        starting_km: "Distância Inicial"
+        final_km: "Distância Final"
+        fixed_price: "Preço Fixo"

@@ -4,13 +4,13 @@ admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password',
 regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular', status: :regular)
 
 # Criando algumas modalidades de transporte de exemplo:
-transport_one = TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 1000,
-                                       minimum_weight: 1, maximum_weight: 3000, tax: 150)
+transport_one = TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 100, maximum_distance: 1000,
+                                       minimum_weight: 1000, maximum_weight: 3000, tax: 150)
 
-transport_two = TransportModel.create!(name: 'Rodoviário - Utilitários', minimum_distance: 1, maximum_distance: 500,
-                                       minimum_weight: 100, maximum_weight: 2000, tax: 50)
+transport_two = TransportModel.create!(name: 'Rodoviário - Utilitários', minimum_distance: 20, maximum_distance: 500,
+                                       minimum_weight: 50, maximum_weight: 2000, tax: 50)
 
-transport_three = TransportModel.create!(name: 'Rodoviário - Motocicleta', minimum_distance: 1, maximum_distance: 200,
+transport_three = TransportModel.create!(name: 'Rodoviário - Motocicleta', minimum_distance: 10, maximum_distance: 200,
                                          minimum_weight: 1, maximum_weight: 300, tax: 20)
 
 transport_four = TransportModel.create!(name: 'Rodoviário - Bicicleta', minimum_distance: 1, maximum_distance: 15,
@@ -85,3 +85,9 @@ second_line = PriceByWeight.create!(starting_weight: 11, final_weight: 50, price
 third_line = PriceByWeight.create!(starting_weight: 51, final_weight: 100, price_per_km: 1.10)
 fourth_line = PriceByWeight.create!(starting_weight: 101, final_weight: 1000, price_per_km: 1.75)
 fifth_line = PriceByWeight.create!(starting_weight: 1000, final_weight: 3000, price_per_km: 2.10)
+
+# Criando tabela de preço por distância:
+line_one = PricePerDistance.create!(starting_km: 0, final_km: 50, fixed_price: 9)
+line_two = PricePerDistance.create!(starting_km: 51, final_km: 150, fixed_price: 12)
+line_three = PricePerDistance.create!(starting_km: 151, final_km: 500, fixed_price: 20)
+line_four = PricePerDistance.create!(starting_km: 501, final_km: 1000, fixed_price: 25)

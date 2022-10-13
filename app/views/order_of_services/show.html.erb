@@ -33,3 +33,25 @@
 <div>
   <%= link_to('Voltar', order_of_services_path) %>
 </div>
+<section id="start_service_orders">
+  <h3>Realizar Entrega</h3>
+  <% if !@carriers.empty? %>
+    <%= form_with(model: [@order_of_service, @start_service_order]) do |f| %>
+      <div>
+        <%= f.label(:carrier_id, 'Veículos para Entrega' ) %>
+        <%= f.collection_select(:carrier_id, @carriers, :id, :description_carrier) %>
+        <%= f.label :delivery_type_commom, 'Entrega Comum' %>
+        <%= f.radio_button :delivery_type, :commom %>
+        <%= f.label :delivery_type_express, 'Entrega Expressa' %>
+        <%= f.radio_button :delivery_type, :express %>
+        <%= f.label :delivery_type_super_express, 'Entrega Super Expressa' %>
+        <%= f.radio_button :delivery_type, :super_express %>
+      </div>
+      <div>
+        <%= f.submit 'Confirmar Entrega'%>
+      </div>
+    <% end %>
+  <% else %>
+    <p> Não há veículos para essa Ordem de Serviço </p>
+  <% end %>
+</section>
