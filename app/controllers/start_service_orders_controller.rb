@@ -1,6 +1,7 @@
 class StartServiceOrdersController < ApplicationController
   def create
     @order_of_service = OrderOfService.find(params[:order_of_service_id])
+    @carrier = Carrier.find(params[:start_service_order][:carrier_id])
 
     start_service_order_params = params.require(:start_service_order).permit(:carrier_id,
                                                                              :delivery_type)
@@ -9,8 +10,10 @@ class StartServiceOrdersController < ApplicationController
     @start_service_order.order_of_service = @order_of_service
 
     if @start_service_order.save
-      redirect_to @order_of_service, notice: 'Entrega em Rota'
+      @carrier.on_delivery!
+      @order_of_service.on_route!
 
+      redirect_to @order_of_service, notice: 'Entrega em Rota'
     else
       redirect_to @order_of_service, notice: 'Entrega não concluída'
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_12_203538) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_13_231200) do
   create_table "carriers", force: :cascade do |t|
     t.string "drivers_name"
     t.string "nameplate"
@@ -23,6 +23,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_12_203538) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
     t.index ["transport_model_id"], name: "index_carriers_on_transport_model_id"
+  end
+
+  create_table "delivery_times", force: :cascade do |t|
+    t.integer "starting_km"
+    t.integer "final_km"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "deadline"
   end
 
   create_table "order_of_services", force: :cascade do |t|
@@ -39,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_12_203538) do
     t.string "order_service_code"
     t.integer "distance"
     t.string "product_weight"
+    t.date "delivery_date"
   end
 
   create_table "price_by_weights", force: :cascade do |t|

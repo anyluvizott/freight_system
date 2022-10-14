@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      delivery_time: "Prazo de Entrega"
+    attributes:
+      delivery_time:
+        starting_km: "Km Inicial"
+        final_km: "Km Final"
+        deadline: "Prazo de Entrega"

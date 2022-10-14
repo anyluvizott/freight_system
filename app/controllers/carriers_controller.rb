@@ -47,6 +47,22 @@ class CarriersController < ApplicationController
     end
   end
 
+  def active
+    @carrier.active!
+    redirect_to @carrier
+  end
+  
+  def on_delivery
+    @carrier.on_delivery!
+    redirect_to @carrier
+  end
+  
+  def under_maintenance
+    @carrier = Carrier.find(params[:id])
+    @carrier.under_maintenance!
+    redirect_to @carrier
+  end
+
   private
 
   def carrier_params

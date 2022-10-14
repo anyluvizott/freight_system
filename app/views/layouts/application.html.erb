@@ -19,6 +19,7 @@
         <%= link_to 'Veículos Cadastrados', carriers_path%> |
         <%= link_to 'Tabela de Preço por Peso', price_by_weights_path%> |
         <%= link_to 'Tabela de Preço por Distância', price_per_distances_path%> |
+        <%= link_to 'Tabela de Prazo de Entrega', delivery_times_path%> |
         <% if user_signed_in? %>
           <%= current_user.user %> |
           <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
