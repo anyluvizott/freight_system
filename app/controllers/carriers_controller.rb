@@ -1,4 +1,6 @@
 class CarriersController < ApplicationController
+  before_action :authenticate_user!
+  
   # GET / carriers
   def index
     @carriers = Carrier.all
@@ -48,19 +50,26 @@ class CarriersController < ApplicationController
   end
 
   def active
+    @carrier = Carrier.find(params[:id])
     @carrier.active!
     redirect_to @carrier
   end
-  
+
   def on_delivery
     @carrier.on_delivery!
     redirect_to @carrier
   end
-  
+
   def under_maintenance
     @carrier = Carrier.find(params[:id])
     @carrier.under_maintenance!
     redirect_to @carrier
+  end
+
+  def search
+    @query = params[:query]
+    @carriers = Carrier.where('drivers_name LIKE ? OR nameplate LIKE ? OR vehicle_model LIKE ? OR status LIKE ?',
+                              "%#{@query}%", "%#{@query}%", "%#{@query}%", "%#{@query}%")
   end
 
   private

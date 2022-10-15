@@ -1,4 +1,5 @@
 class PricePerDistancesController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @price_per_distances = PricePerDistance.all

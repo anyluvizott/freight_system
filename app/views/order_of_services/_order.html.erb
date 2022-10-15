@@ -1,0 +1,15 @@
+<dl>
+  <dt>
+    <h3>Serviço <%= link_to order.order_service_code, order %> </h3>
+  </dt>
+  <dd>
+    <p>Carga de <%= order.product_weight%>kg para percorrer uma distância de <%= order.distance%>km </p>
+  </dd>
+  <dd>
+    <p>Saindo de <%= order.full_sender_address%> para o destino de <%= order.recipient_full_address%></p>
+  </dd>
+  <dd>
+    <p>Status: <%= order.status %> </p>
+  </dd>
+</dl>
+

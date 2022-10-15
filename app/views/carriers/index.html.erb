@@ -8,13 +8,20 @@
   <% end %>
 <% end %>
 <div>
+  <%= form_with(url: search_carriers_path, method: :get) do |f| %>
+    <%= f.label :query, 'Buscar Veículo' %>
+    <%= f.text_field :query %>
+    <%= f.submit 'Buscar' %>
+  <% end %>
+</div>
+<div>
   <% if @carriers.any? %>
     <% @carriers.each do |carrier| %>
       <div>
         <dl>
           <dt><%= link_to carrier.transport_model.name, carrier %> </dt>
           <dd><%= carrier.drivers_name %> - <%= carrier.vehicle_model %> - <%= carrier.nameplate %> </dd>
-          <dd><%= carrier.status %> </dd>
+          <dd><%= Carrier.human_attribute_name("status.#{carrier.status}") %> </dd>
         </dl>
       </div>
     <% end %>

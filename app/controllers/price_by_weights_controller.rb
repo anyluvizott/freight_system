@@ -1,4 +1,5 @@
 class PriceByWeightsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @price_by_weights = PriceByWeight.all

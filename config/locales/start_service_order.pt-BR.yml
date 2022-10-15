@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      start_service_order: 'Iniciar Ordem de Serviço'
+    attributes:
+      start_service_order:
+        commom: 'Comum'
+        express: 'Expressa'
+        super_express: 'Super Expressa'

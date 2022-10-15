@@ -1,0 +1,32 @@
+<h1> Resultado da Buscar por: <%= @query %> </h1>
+<% @order_of_service.each do |order| %>
+  <div>
+    <h2>Ordem de Serviço - Código <%= order.order_service_code %></h2>
+    <dl>
+      <dt>Endereço Completo da Saída da Carga:</dt>
+      <dd><%= order.full_sender_address %></dd>
+      <br>
+      <dt>Código do Produto:</dt>
+      <dd><%= order.product_code %></dd>
+      <br>
+      <dt>Dimensões da Carga:</dt>
+      <dd><%= order.product_length %>cm x <%= order.product_width %>cm x <%= order.product_height %>cm </dd>
+      <br>
+      <dt>Peso da Carga:</dt>
+      <dd><%= order.product_weight %>kg</dd>
+      <br>
+      <dt>Endereço Completo do Destinatário:</dt>
+      <dd><%= order.recipient_full_address %></dd>
+      <br>
+      <dt>Nome do Destinatário:</dt>
+      <dd><%= order.recipients_name %></dd>
+      <br>
+      <dt>Distância que a carga vai percorrer:</dt>
+      <dd><%= order.distance %>km</dd>
+      <br>
+      <dd>
+        <strong>Status: <%= OrderOfService.human_attribute_name("status.#{order.status}") %> </strong>
+      </dd>
+    </dl>
+  </div>
+<% end %>

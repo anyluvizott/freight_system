@@ -1,4 +1,5 @@
 class OrderOfServicesController < ApplicationController
+  before_action :authenticate_user!
   def index
     @order_of_services = OrderOfService.all
   end
@@ -11,6 +12,7 @@ class OrderOfServicesController < ApplicationController
     @sum = sum
     @select_transport_model = select_transport_model
     @deadline = deadline
+    @carrier_start_service_order = carrier_start_service_order unless @order_of_service.start_service_order.nil?
   end
 
   def new
@@ -44,21 +46,39 @@ class OrderOfServicesController < ApplicationController
   end
 
   def on_route
+    @order_of_service = OrderOfService.find(params[:id])
     @order_of_service.on_route!
-    redirect_to @order_of_service
+    redirect_to @order_of_service, notice: 'Ordem de Serviço em Rota'
   end
-  
+
   def delivered
     @order_of_service = OrderOfService.find(params[:id])
     @order_of_service.delivery_date = Time.now
     @order_of_service.delivered!
     @carrier = Carrier.find(@order_of_service.start_service_order.carrier_id)
     @carrier.active!
-    
+
     redirect_to @order_of_service, notice: 'Ordem de Serviço Concluída'
   end
 
+  def search
+    @query = params[:query]
+    @order_of_service = OrderOfService.where(
+      'full_sender_address LIKE ? OR recipient_full_address LIKE ? OR recipients_name LIKE ? OR order_service_code LIKE ? OR product_code LIKE ? OR status LIKE ?', "%#{@query}%", "%#{@query}%", "%#{@query}%", "%#{@query}%", "%#{@query}%", "%#{@query}%"
+    )
+  end
+
   private
+
+  def carrier_start_service_order
+    start = StartServiceOrder.all
+    start_service = []
+    start.each do |st|
+      start_service = st if st.order_of_service_id == @order_of_service.id
+    end
+    carrier = start_service.carrier_id
+    carrier_found = Carrier.find(carrier)
+  end
 
   def order_of_service_params
     params.require(:order_of_service).permit(:full_sender_address, :product_height, :product_width,

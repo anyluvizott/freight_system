@@ -1,13 +1,14 @@
 pt-BR:
-  active: "Ativo"
-  on_delivery: "Em Entrega"
-  under_maintenance: "Em Manutenção"
   activerecord:
     models:
       carrier:
         one: "Veículo"
         other: "Veículos"
     attributes:
+      carrier/status:
+        active: "Ativo"
+        on_delivery: "Em Entrega"
+        under_maintenance: "Em Manutenção"
       carrier:
         drivers_name: "Nome do Motorista"
         nameplate: "Placa de Identificação"

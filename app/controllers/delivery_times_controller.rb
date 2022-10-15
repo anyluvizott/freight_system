@@ -1,4 +1,6 @@
 class DeliveryTimesController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @delivery_times = DeliveryTime.all
     @delivery_time = DeliveryTime.new

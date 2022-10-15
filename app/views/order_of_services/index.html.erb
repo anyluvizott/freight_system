@@ -7,72 +7,37 @@
     </div>
   <% end %>
 <% end %>
+
+<div>
+<%= form_with(url: search_order_of_services_path, method: :get) do |f| %>
+<%= f.label :query, 'Buscar Ordem de Serviço' %>
+<%= f.text_field :query %>
+<%= f.submit 'Buscar' %>
+<% end %>
+</div>
+
 <div>
   <% if @order_of_services.any? %>
     <% @order_of_services.each do |order| %>
-      <% if order.pending? %>
-        <h2> Ordem de Serviço Pendente: </h2>
-        <dl>
-          <dt>
-            <h3>Serviço <%= link_to order.order_service_code, order %> </h3>
-          </dt>
-          <dd>
-            <p>Carga de <%= order.product_weight%>kg para percorrer uma distância de <%= order.distance%>km </p>
-          </dd>
-          <dd>
-            <p>Saindo de <%= order.full_sender_address%> para o destino de <%= order.recipient_full_address%></p>
-          </dd>
-          <dd>
-            <p>Status: <%= order.status %>
-            </dd>
-          </dl>
-        <% else %>
-          <p>Nenhuma Ordem de Serviço Pendente no momento</p>
-        <% end %>
-      <% end %>
-      <% @order_of_services.each do |order| %>
-        <% if order.on_route? %>
-          <h2> Ordem de Serviço em Rota de Entrega: </h2>
-          <dl>
-            <dt>
-              <h3>Serviço <%= link_to order.order_service_code, order %> </h3>
-            </dt>
-            <dd>
-              <p>Carga de <%= order.product_weight%>kg para percorrer uma distância de <%= order.distance%>km </p>
-            </dd>
-            <dd>
-              <p>Saindo de <%= order.full_sender_address%> para o destino de <%= order.recipient_full_address%></p>
-            </dd>
-            <dd>
-              <p>Status: <%= order.status %>
-              </dd>
-            </dl>
-          <% else %>
-            <p>Nenhuma Ordem de Serviço em Rota de Entrega no momento</p>
-          <% end %>
-        <% end %>
-        <% @order_of_services.each do |order| %>
-          <% if order.delivered? %>
-            <h2> Ordem de Serviço Concluída: </h2>
-            <dl>
-              <dt>
-                <h3>Serviço <%= link_to order.order_service_code, order %> </h3>
-              </dt>
-              <dd>
-                <p>Carga de <%= order.product_weight%>kg para percorrer uma distância de <%= order.distance%>km </p>
-              </dd>
-              <dd>
-                <p>Saindo de <%= order.full_sender_address%> para o destino de <%= order.recipient_full_address%></p>
-              </dd>
-              <dd>
-                <p>Status: <%= order.status %>
-                </dd>
-              </dl>
-            <% else %>
-              <p>Nenhuma Ordem de Serviço Concluída no momento</p>
-            <% end %>
-          <% end %>
-        <% else %>
-          <p>Nenhuma Ordem de Serviço Cadastrada.</p>
-        <% end %>
-      </div>
+      <dl>
+        <dt>
+          <h3>Serviço <%= link_to order.order_service_code, order %> </h3>
+        </dt>
+        <dd>
+          <p>Carga de <%= order.product_weight%>kg para percorrer uma distância de <%= order.distance%>km </p>
+        </dd>
+        <dd>
+          <p>Saindo de <%= order.full_sender_address%> para o destino de <%= order.recipient_full_address%></p>
+        </dd>
+        <dd>
+          <p><strong>Status: <%= OrderOfService.human_attribute_name("status.#{order.status}") %> </strong></p>
+        </dd>
+      </dl>
+    <% end %>
+  <% end %>
+  <div>
+    <% if @order_of_services.empty? %>
+      <p>Nenhuma Ordem de Serviço Cadastrada.</p>
+    <% end %>
+  </div>
+

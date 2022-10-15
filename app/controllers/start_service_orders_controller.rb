@@ -1,4 +1,6 @@
 class StartServiceOrdersController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
     @order_of_service = OrderOfService.find(params[:order_of_service_id])
     @carrier = Carrier.find(params[:start_service_order][:carrier_id])
@@ -12,6 +14,7 @@ class StartServiceOrdersController < ApplicationController
     if @start_service_order.save
       @carrier.on_delivery!
       @order_of_service.on_route!
+      @order_of_service.departure_date = Time.now
 
       redirect_to @order_of_service, notice: 'Entrega em Rota'
     else

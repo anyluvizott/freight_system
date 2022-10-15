@@ -17,6 +17,7 @@ class OrderOfService < ApplicationRecord
 
   enum status: { pending: 0, on_route: 5, delivered: 9 }
 
+
   private
 
   def generate_order_service_code
@@ -26,5 +27,4 @@ class OrderOfService < ApplicationRecord
   def generate_product_code
     self.product_code = SecureRandom.alphanumeric(5).upcase
   end
-  
 end

@@ -1,0 +1,15 @@
+<h1>Resultado da busca</h1>
+<h2>Ordem de Serviço - Código <%= @order.order_service_code %></h2>
+<dl>
+  <dt>Endereço Completo da Saída da Carga:</dt>
+  <dd><%= @order.full_sender_address %></dd>
+  <br>
+  <dt>Endereço Completo do Destinatário:</dt>
+  <dd><%= @order.recipient_full_address %></dd>
+  <br>
+  <dt>Nome do Destinatário:</dt>
+  <dd><%= @order.recipients_name %></dd>
+  <br>
+  <dt><strong>Status:</dt>
+    <dd><%= OrderOfService.human_attribute_name("status.#{@order.status}") %> </strong></dd>
+</dl>
