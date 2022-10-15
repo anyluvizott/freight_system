@@ -1,23 +1,19 @@
 class CarriersController < ApplicationController
   before_action :authenticate_user!
   
-  # GET / carriers
   def index
     @carriers = Carrier.all
   end
 
-  # GET / carriers / 1
   def show
     @carrier = Carrier.find(params[:id])
   end
 
-  # GET / carriers / new
   def new
     @carrier = Carrier.new
     @transport_models = TransportModel.all
   end
 
-  # POST / carriers
   def create
     @carrier = Carrier.new(carrier_params)
     if @carrier.save
@@ -29,7 +25,6 @@ class CarriersController < ApplicationController
     end
   end
 
-  # GET / carriers / 1 / edit
   def edit
     @carrier = Carrier.find(params[:id])
     @transport_models = TransportModel.all

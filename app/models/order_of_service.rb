@@ -17,7 +17,6 @@ class OrderOfService < ApplicationRecord
 
   enum status: { pending: 0, on_route: 5, delivered: 9 }
 
-
   private
 
   def generate_order_service_code

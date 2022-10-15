@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_14_215523) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_15_162607) do
   create_table "carriers", force: :cascade do |t|
     t.string "drivers_name"
     t.string "nameplate"
@@ -46,9 +46,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_215523) do
     t.integer "status", default: 0
     t.string "order_service_code"
     t.integer "distance"
-    t.string "product_weight"
     t.date "delivery_date"
     t.date "departure_date"
+    t.integer "product_weight"
   end
 
   create_table "price_by_weights", force: :cascade do |t|

@@ -1,25 +1,23 @@
 require 'rails_helper'
 
-describe 'Usuário edita uma modalidade de transporte' do
-  it 'a partir da página de detalhes' do
+describe 'Usuário Administrador edita uma modalidade de trasporte' do
+  it 'a partir do menu' do
     admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
                          status: :admin)
 
-    TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
-                           minimum_weight: 1, maximum_weight: 3_000, tax: 150)
+    transp1 = TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 1000,
+                                     minimum_weight: 1, maximum_weight: 3_000, tax: 150)
 
     login_as(admin)
     visit root_path
-    within('nav') do
-      click_on 'Modalidades de Transporte'
-    end
+    click_on 'Modalidades de Transporte'
     click_on 'Rodoviário - Caminhão'
     click_on 'Editar Modalidade'
 
     expect(page).to have_content 'Editar Modalidade de Transporte'
     expect(page).to have_field 'Nome da Modalidade',	with: 'Rodoviário - Caminhão'
     expect(page).to have_field 'Distância Mínima',	with: '1'
-    expect(page).to have_field 'Distância Máxima',	with: '600'
+    expect(page).to have_field 'Distância Máxima',	with: '1000'
     expect(page).to have_field 'Peso Mínimo da Carga',	with: '1'
     expect(page).to have_field 'Peso Máximo da Carga',	with: '3000'
     expect(page).to have_field 'Taxa Fixa de Entrega',	with: '150'
@@ -34,9 +32,7 @@ describe 'Usuário edita uma modalidade de transporte' do
 
     login_as(admin)
     visit root_path
-    within('nav') do
-      click_on 'Modalidades de Transporte'
-    end
+    click_on 'Modalidades de Transporte'
     click_on 'Rodoviário - Caminhão'
     click_on 'Editar Modalidade'
     fill_in 'Distância Máxima',	with: '650'
@@ -50,9 +46,10 @@ describe 'Usuário edita uma modalidade de transporte' do
     expect(page).to have_content 'Peso Mínimo da Carga: 1kg'
     expect(page).to have_content 'Peso Máximo da Carga: 3500kg'
     expect(page).to have_content 'Taxa Fixa de Entrega: R$ 150,00'
+    expect(page).not_to have_content 'Não foi possível atualizar'
   end
 
-  it 'e mantém os campos obrigatórios' do
+  it 'com dados incompletos' do
     admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
                          status: :admin)
 
@@ -61,9 +58,7 @@ describe 'Usuário edita uma modalidade de transporte' do
 
     login_as(admin)
     visit root_path
-    within('nav') do
-      click_on 'Modalidades de Transporte'
-    end
+    click_on 'Modalidades de Transporte'
     click_on 'Rodoviário - Caminhão'
     click_on 'Editar Modalidade'
     fill_in 'Distância Máxima',	with: nil
@@ -73,5 +68,6 @@ describe 'Usuário edita uma modalidade de transporte' do
     expect(page).to have_content 'Não foi possível atualizar'
     expect(page).to have_content 'Distância Máxima não pode ficar em branco'
     expect(page).to have_content 'Peso Máximo da Carga não pode ficar em branco'
+    expect(page).not_to have_content 'Modalidade Atualizada com Sucesso'
   end
 end

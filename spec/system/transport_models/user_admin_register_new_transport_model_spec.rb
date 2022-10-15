@@ -1,15 +1,13 @@
 require 'rails_helper'
 
-describe 'Usúario cadastra uma nova modalidade de transporte' do
+describe 'Usuário Administrador cadastra uma nova Modalidade de Transporte' do
   it 'a partir do menu' do
     admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
                          status: :admin)
 
     login_as(admin)
     visit root_path
-    within('nav') do
-      click_on 'Modalidades de Transporte'
-    end
+    click_on 'Modalidades de Transporte'
     click_on 'Cadastrar Nova Modalidade de Transporte'
 
     expect(page).to have_field 'Nome da Modalidade'
@@ -26,9 +24,7 @@ describe 'Usúario cadastra uma nova modalidade de transporte' do
 
     login_as(admin)
     visit root_path
-    within('nav') do
-      click_on 'Modalidades de Transporte'
-    end
+    click_on 'Modalidades de Transporte'
     click_on 'Cadastrar Nova Modalidade de Transporte'
     fill_in 'Nome da Modalidade',	with: 'Rodoviário - Caminhão'
     fill_in 'Distância Mínima',	with: '1'
@@ -45,6 +41,7 @@ describe 'Usúario cadastra uma nova modalidade de transporte' do
     expect(page).to have_content 'Peso Mínimo da Carga: 1kg'
     expect(page).to have_content 'Peso Máximo da Carga: 3000kg'
     expect(page).to have_content 'Taxa Fixa de Entrega: R$ 150,00'
+    expect(page).not_to have_content 'Modalidade de Transporte não cadastrada'
   end
 
   it 'com dados incompletos' do
@@ -53,16 +50,14 @@ describe 'Usúario cadastra uma nova modalidade de transporte' do
 
     login_as(admin)
     visit root_path
-    within('nav') do
-      click_on 'Modalidades de Transporte'
-    end
+    click_on 'Modalidades de Transporte'
     click_on 'Cadastrar Nova Modalidade de Transporte'
-    fill_in 'Nome da Modalidade',	with: ''
-    fill_in 'Distância Mínima',	with: ''
-    fill_in 'Distância Máxima',	with: ''
-    fill_in 'Peso Mínimo da Carga',	with: ''
-    fill_in 'Peso Máximo da Carga',	with: ''
-    fill_in 'Taxa Fixa de Entrega',	with: ''
+    fill_in 'Nome da Modalidade',	with: nil
+    fill_in 'Distância Mínima',	with: nil
+    fill_in 'Distância Máxima',	with: nil
+    fill_in 'Peso Mínimo da Carga',	with: nil
+    fill_in 'Peso Máximo da Carga',	with: nil
+    fill_in 'Taxa Fixa de Entrega',	with: nil
     click_on 'Enviar'
 
     expect(page).to have_content 'Modalidade de Transporte não cadastrada'
@@ -71,5 +66,6 @@ describe 'Usúario cadastra uma nova modalidade de transporte' do
     expect(page).to have_content 'Peso Mínimo da Carga não pode ficar em branco'
     expect(page).to have_content 'Peso Máximo da Carga não pode ficar em branco'
     expect(page).to have_content 'Taxa Fixa de Entrega não pode ficar em branco'
+    expect(page).not_to have_content 'Modalidade de Transporte cadastrada com sucesso'
   end
 end

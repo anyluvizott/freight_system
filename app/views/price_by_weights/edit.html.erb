@@ -1,0 +1,7 @@
+<h1>Editar valor da Tabela de Preço por Peso</h1>
+<hr/>
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <%= render 'form' %>
+  <% end %>
+<% end %>

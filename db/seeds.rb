@@ -45,11 +45,11 @@ motorcycle_two = Carrier.create!(drivers_name: 'Gabriela Almeida', nameplate: 'J
                                  vehicle_model: 'Triciclo Honda Tricargo CG 150 Titan', vehicle_brand: 'Honda',
                                  year_of_manufacture: 2010, maximum_weight: 250, transport_model: transport_three)
 
-bicycle_one = Carrier.create!(drivers_name: 'Marcelo Ferreira', nameplate: nil,
+bicycle_one = Carrier.create!(drivers_name: 'Marcelo Ferreira', nameplate: 'BIKEMARAMA',
                               vehicle_model: 'Bicicleta Cargueira Aro 26 Amarela', vehicle_brand: 'Samy',
                               year_of_manufacture: 2010, maximum_weight: 40, transport_model: transport_four)
 
-bicycle_two = Carrier.create!(drivers_name: 'Josevaldo da Silva', nameplate: nil,
+bicycle_two = Carrier.create!(drivers_name: 'Josevaldo da Silva', nameplate: 'BIKEJOSVER',
                               vehicle_model: 'Bicicleta Cargueira Aro 26 Verde', vehicle_brand: 'Samy',
                               year_of_manufacture: 2010, maximum_weight: 40, transport_model: transport_four)
 
@@ -80,20 +80,20 @@ order_four = OrderOfService.create!(full_sender_address: 'Galpão Materiais de C
   #                                  distance: 315, product_weight: 30)
 
 # Criando tabela de preço por peso:
-first_line = PriceByWeight.create!(starting_weight: 0, final_weight: 10, price_per_km: 0.50)
+first_line = PriceByWeight.create!(starting_weight: 1, final_weight: 10, price_per_km: 0.50)
 second_line = PriceByWeight.create!(starting_weight: 11, final_weight: 50, price_per_km: 0.80)
 third_line = PriceByWeight.create!(starting_weight: 51, final_weight: 100, price_per_km: 1.10)
 fourth_line = PriceByWeight.create!(starting_weight: 101, final_weight: 1000, price_per_km: 1.75)
 fifth_line = PriceByWeight.create!(starting_weight: 1000, final_weight: 3000, price_per_km: 2.10)
 
 # Criando tabela de preço por distância:
-line_one = PricePerDistance.create!(starting_km: 0, final_km: 50, fixed_price: 9)
+line_one = PricePerDistance.create!(starting_km: 1, final_km: 50, fixed_price: 9)
 line_two = PricePerDistance.create!(starting_km: 51, final_km: 150, fixed_price: 12)
 line_three = PricePerDistance.create!(starting_km: 151, final_km: 500, fixed_price: 20)
 line_four = PricePerDistance.create!(starting_km: 501, final_km: 1000, fixed_price: 25)
 
 # Criando tabela de prazo de entrega
-first_deadline = DeliveryTime.create!(starting_km: 0, final_km: 100, deadline: 48)
+first_deadline = DeliveryTime.create!(starting_km: 1, final_km: 100, deadline: 48)
 second_deadline = DeliveryTime.create!(starting_km: 101, final_km: 300, deadline: 96)
 third_deadline = DeliveryTime.create!(starting_km: 301, final_km: 500, deadline: 120)
 fourth_deadline = DeliveryTime.create!(starting_km: 501, final_km: 1000, deadline: 240)

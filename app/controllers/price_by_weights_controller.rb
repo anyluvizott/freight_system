@@ -12,17 +12,29 @@ class PriceByWeightsController < ApplicationController
     if @price_by_weight.save
       redirect_to price_by_weights_path, notice: 'Novo valor adicionado'
     else
-      flash.now[:alert] = 'Não foi possível adicionar novo valor'
-      render 'index'
+      redirect_to price_by_weights_path,
+                  alert: 'Não foi possível adicionar novo valor, os campos não podem ficar em branco'
     end
   end
 
-  def update; end
+  def edit
+    @price_by_weight = PriceByWeight.find(params[:id])
+  end
+
+  def update
+    @price_by_weight = PriceByWeight.find(params[:id])
+
+    if @price_by_weight.update(price_by_weights_params)
+      redirect_to price_by_weights_path, notice: 'Valor atualizado com sucesso'
+    else
+      flash.now[:alert] = 'Não foi possível atualizar'
+      render 'edit'
+    end
+  end
 
   private
 
   def price_by_weights_params
     params.require(:price_by_weight).permit(:starting_weight, :final_weight, :price_per_km)
   end
-  
 end

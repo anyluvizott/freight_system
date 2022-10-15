@@ -4,5 +4,4 @@ class StartServiceOrder < ApplicationRecord
   has_one :transport_model, through: :carrier
 
   validates :delivery_type, presence: true
-
 end

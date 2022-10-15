@@ -1,12 +1,13 @@
 require 'rails_helper'
 
-describe 'Usuário edita um veículo cadastrado' do
+describe 'Usuário Administrador edita um veículo cadastrado' do
   it 'a partir do menu' do
     admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
                          status: :admin)
 
     transp = TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
                                     minimum_weight: 1, maximum_weight: 3_000, tax: 150)
+
     truck = Carrier.create!(drivers_name: 'Fernando Mendes', nameplate: 'BCG5L88',
                             vehicle_model: 'Hyundai/HR 2.5 TCI 4x2 - Diesel', vehicle_brand: 'Hyundai',
                             year_of_manufacture: 2016, maximum_weight: 3_000, transport_model: transp)
@@ -32,6 +33,7 @@ describe 'Usuário edita um veículo cadastrado' do
 
     transp = TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
                                     minimum_weight: 1, maximum_weight: 3_000, tax: 150)
+
     truck = Carrier.create!(drivers_name: 'Fernando Mendes', nameplate: 'BCG5L88',
                             vehicle_model: 'Hyundai/HR 2.5 TCI 4x2 - Diesel', vehicle_brand: 'Hyundai',
                             year_of_manufacture: 2016, maximum_weight: 3_000, transport_model: transp)
@@ -49,16 +51,21 @@ describe 'Usuário edita um veículo cadastrado' do
     expect(page).to have_content 'Veículo atualizado com sucesso.'
     expect(page).to have_content 'Nome do Motorista: Rogério Siqueira'
     expect(page).to have_content 'Placa de Identificação: GFD8K64'
+    expect(page).to have_content 'Modelo do Veículo: Hyundai/HR 2.5 TCI 4x2 - Diesel'
+    expect(page).to have_content 'Marca do Veículo: Hyundai'
+    expect(page).to have_content 'Ano de Fabricação: 2016'
     expect(page).to have_content 'Peso Máximo da Carga: 2500kg'
     expect(page).not_to have_content 'Não foi possível atualizar'
+    expect(page).to have_link 'Voltar'
   end
 
-  it 'e mantém os campos obrigatórios' do
+  it 'com dados incompletos' do
     admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
                          status: :admin)
 
     transp = TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 600,
                                     minimum_weight: 1, maximum_weight: 3_000, tax: 150)
+
     truck = Carrier.create!(drivers_name: 'Fernando Mendes', nameplate: 'BCG5L88',
                             vehicle_model: 'Hyundai/HR 2.5 TCI 4x2 - Diesel', vehicle_brand: 'Hyundai',
                             year_of_manufacture: 2016, maximum_weight: 3_000, transport_model: transp)

@@ -1,20 +1,20 @@
 require 'rails_helper'
 
-describe 'Usuário vê os veículos cadastrados' do
+describe 'Usuário Regular vê os veículos cadastrados' do
   it 'a partir do menu' do
-    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
-                         status: :admin)
+    regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular',
+                           status: :regular)
 
-    login_as(admin)
+    login_as(regular)
     visit root_path
     click_on 'Veículos Cadastrados'
 
     expect(current_path).to eq carriers_path
   end
 
-  it 'com sucesso' do
-    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
-                         status: :admin)
+  it 'e não tem acesso ao cadastro de novos veículos' do
+    regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular',
+                           status: :regular)
 
     transp = TransportModel.create!(name: 'Rodoviário - Utilitários', minimum_distance: 1, maximum_distance: 150,
                                     minimum_weight: 100, maximum_weight: 2_000, tax: 50)
@@ -30,7 +30,7 @@ describe 'Usuário vê os veículos cadastrados' do
                            vehicle_model: 'Triciclo Sousa Mod. TR 150', vehicle_brand: 'Sousa Motos',
                            year_of_manufacture: 2018, maximum_weight: 300, transport_model: transp1)
 
-    login_as(admin)
+    login_as(regular)
     visit root_path
     click_on 'Veículos Cadastrados'
 
@@ -39,13 +39,15 @@ describe 'Usuário vê os veículos cadastrados' do
     expect(page).to have_content 'Rodoviário - Motocicleta'
     expect(page).to have_content 'Gabriela Almeida - Renault Master 2.3 DCI Furgão L1H1 - Diesel - KLO6S98'
     expect(page).to have_content 'Roberto Siqueira - Triciclo Sousa Mod. TR 150 - FDS5A44'
+    
+    expect(page).not_to have_content 'Cadastrar Novo Veículo'
   end
 
   it 'e não existem veículos cadastrados' do
-    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
-                         status: :admin)
+    regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular',
+                           status: :regular)
 
-    login_as(admin)
+    login_as(regular)
     visit root_path
     click_on 'Veículos Cadastrados'
 

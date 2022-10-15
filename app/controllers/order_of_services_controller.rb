@@ -1,7 +1,7 @@
 class OrderOfServicesController < ApplicationController
   before_action :authenticate_user!
   def index
-    @order_of_services = OrderOfService.all
+    @order_of_services = OrderOfService.all.order(status: :asc)
   end
 
   def show
@@ -71,12 +71,7 @@ class OrderOfServicesController < ApplicationController
   private
 
   def carrier_start_service_order
-    start = StartServiceOrder.all
-    start_service = []
-    start.each do |st|
-      start_service = st if st.order_of_service_id == @order_of_service.id
-    end
-    carrier = start_service.carrier_id
+    carrier = StartServiceOrder.find_by(order_of_service_id: @order_of_service.id).carrier_id
     carrier_found = Carrier.find(carrier)
   end
 
