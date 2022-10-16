@@ -20,19 +20,19 @@
   <dd><%= @carrier.year_of_manufacture %></dd>
   <dt>Peso Máximo da Carga:</dt>
   <dd><%= @carrier.maximum_weight %>kg</dd>
-  <h3>
-    <dt>Status:</dt>
-  </h3>
-  <h3>
-    <dd><%= Carrier.human_attribute_name("status.#{@carrier.status}") %></dd>
-  </h3>
+  <dt>Status:</dt>
+  <dd><%= Carrier.human_attribute_name("status.#{@carrier.status}") %></dd>
 </dl>
 <div>
-  <% if @carrier.active? %>
-    <%= button_to 'Veículo em Manutenção', under_maintenance_carrier_path(@carrier) %>
-  <% end %>
-  <% if @carrier.under_maintenance? %>
-    <%= button_to 'Veículo Ativo', active_carrier_path(@carrier) %>
+  <% if user_signed_in? %>
+    <% if current_user.admin? %>
+      <% if @carrier.active? %>
+        <%= button_to 'Veículo em Manutenção', under_maintenance_carrier_path(@carrier) %>
+      <% end %>
+      <% if @carrier.under_maintenance? %>
+        <%= button_to 'Veículo Ativo', active_carrier_path(@carrier) %>
+      <% end %>
+    <% end %>
   <% end %>
 </div>
 <br>

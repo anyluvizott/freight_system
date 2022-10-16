@@ -77,7 +77,8 @@ order_four = OrderOfService.create!(full_sender_address: 'Galpão Materiais de C
 order_five = OrderOfService.create!(full_sender_address: 'Galpão Surf & Praia - Avenida Manoel Ribas, 634 - Pinhais PR',
                                     product_length: 100, product_width: 100, product_height: 100,
                                     recipient_full_address: 'Rua das Formigas, 100 - Florianópolis SC', recipients_name: 'Joana Siqueira',
-                                    distance: 315, product_weight: 500)
+                                    distance: 315, product_weight: 500, status: :delivered, delivery_date: 10.days.ago, final_date: 1.day.ago)
+start_order_five = StartServiceOrder.create!(order_of_service_id: 5, carrier_id: 1, delivery_type: 'comum')
 
 # Criando tabela de preço por peso:
 first_line = PriceByWeight.create!(starting_weight: 1, final_weight: 10, price_per_km: 0.50)

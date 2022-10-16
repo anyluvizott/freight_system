@@ -13,6 +13,7 @@ class OrderOfServicesController < ApplicationController
     @select_transport_model = select_transport_model
     @deadline = deadline
     @carrier_start_service_order = carrier_start_service_order unless @order_of_service.start_service_order.nil?
+
   end
 
   def new
@@ -53,7 +54,7 @@ class OrderOfServicesController < ApplicationController
 
   def delivered
     @order_of_service = OrderOfService.find(params[:id])
-    @order_of_service.delivery_date = Time.current
+    @order_of_service.final_date = Time.current
     @order_of_service.delivered!
     @carrier = Carrier.find(@order_of_service.start_service_order.carrier_id)
     @carrier.active!
@@ -70,25 +71,29 @@ class OrderOfServicesController < ApplicationController
 
   private
 
+  def order_of_service_params
+    params.require(:order_of_service).permit(:full_sender_address, :product_height, :product_width,
+                                             :product_length, :recipient_full_address, :recipients_name,
+                                             :distance, :product_weight, :note)
+  end
+
   def carrier_start_service_order
     carrier = StartServiceOrder.find_by(order_of_service_id: @order_of_service.id).carrier_id
     carrier_found = Carrier.find(carrier)
   end
 
-  def order_of_service_params
-    params.require(:order_of_service).permit(:full_sender_address, :product_height, :product_width,
-                                             :product_length, :recipient_full_address, :recipients_name,
-                                             :distance, :product_weight)
-  end
-
   def select_carriers
     select_carriers = []
+    result = []
     carriers = Carrier.where('maximum_weight >= ?', @order_of_service.product_weight)
 
     carriers.each do |var|
       if var.transport_model.minimum_weight <= @order_of_service.product_weight.to_i && var.transport_model.minimum_distance <= @order_of_service.distance && var.transport_model.maximum_distance >= @order_of_service.distance
-        select_carriers << var
+        result << var
       end
+    end
+    result.each do |var|
+      select_carriers << var if var.active?
     end
     select_carriers
   end
