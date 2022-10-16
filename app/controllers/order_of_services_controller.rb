@@ -147,6 +147,6 @@ class OrderOfServicesController < ApplicationController
 
   def timelimit
     @order_of_service = OrderOfService.find(params[:id])
-    timelimit = (@order_of_service.final_date.hour-@order_of_service.delivery_date.hour).to_s.to_i
+    timelimit = ((@order_of_service.final_date-@order_of_service.delivery_date)/1.hour).to_i
   end
 end

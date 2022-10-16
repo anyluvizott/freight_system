@@ -54,31 +54,47 @@ bicycle_two = Carrier.create!(drivers_name: 'Josevaldo da Silva', nameplate: 'BI
                               year_of_manufacture: 2010, maximum_weight: 40, transport_model: transport_four)
 
 # Criando algumas ordens de serviço de exemplo:
-order_one = OrderOfService.create!(full_sender_address: 'Galpão das Frutas Tropicais - Rua das Maçãs, 150 - Curitiba PR',
-                                   product_length: 25, product_width: 17, product_height: 8,
-                                   recipient_full_address: 'Rua das Laranjas, 253 - Curitiba PR', recipients_name: 'Flora Mendes',
-                                   distance: 15, product_weight: 5)
+order_one = OrderOfService.create!(full_sender_address: 'Recanto Nerd do Rafael - Rua Athur Manoel, 456 - Curitiba PR',
+                                   product_length: 25, product_width: 20, product_height: 10,
+                                   recipient_full_address: 'Rua das Banana, 241 - Curitiba PR', recipients_name: 'Nana Marrye',
+                                   distance: 20, product_weight: 8, status: :on_route, delivery_date: 3.days.ago)
+start_order_one = StartServiceOrder.create!(order_of_service_id: 1, carrier_id: 9, delivery_type: 'expressa')
 
-order_two = OrderOfService.create!(full_sender_address: 'Galpão Aeroporto Afonso Pena - Rua das Araras, 2000 - São José dos Pinhais PR',
-                                   product_length: 31, product_width: 20, product_height: 11,
-                                   recipient_full_address: 'Rua das Cegonhas, 2541 - Curitiba PR', recipients_name: 'Roberto Quintana',
-                                   distance: 30, product_weight: 20)
+order_two = OrderOfService.create!(full_sender_address: 'Cantinho da Tia Anastácia - Rua Palmeiras do Havaí, 50 - Curitiba PR',
+                                   product_length: 30, product_width: 20, product_height: 8,
+                                   recipient_full_address: 'Rua dos Papagaios, 805 - Curitiba PR', recipients_name: 'Caio Vidal',
+                                   distance: 30, product_weight: 15)
 
-order_three = OrderOfService.create!(full_sender_address: 'Galpão Artes & Brinquedos - Rua das Bonecas, 541 - Curitiba PR',
-                                     product_length: 34, product_width: 27, product_height: 14,
-                                     recipient_full_address: 'Rua Figueiredo Assunção, 786 - Colombro PR', recipients_name: 'Heloisa Fagundes',
-                                     distance: 50, product_weight: 50)
+order_three = OrderOfService.create!(full_sender_address: 'Mercado dos Anões - Rua Jardim Encantado, 200 - Curitiba PR',
+                                     product_length: 50, product_width: 25, product_height: 25,
+                                     recipient_full_address: 'Avenida das Flores, 27 - Curitiba PR', recipients_name: 'Tony Hitoshi',
+                                     distance: 25, product_weight: 20)
 
-order_four = OrderOfService.create!(full_sender_address: 'Galpão Materiais de Contrução - Rua Frederico Feijó, 854 - Pinhais PR',
-                                    product_length: 200, product_width: 200, product_height: 200,
-                                    recipient_full_address: 'Rua Joaquim da Peste - São Paulo SP', recipients_name: 'Roberto da Silva',
-                                    distance: 400, product_weight: 2500)
+order_four = OrderOfService.create!(full_sender_address: 'Galpão das Frutas Tropicais - Rua das Maçãs, 150 - Curitiba PR',
+                                    product_length: 25, product_width: 17, product_height: 8,
+                                    recipient_full_address: 'Rua das Laranjas, 253 - Curitiba PR', recipients_name: 'Flora Mendes',
+                                    distance: 15, product_weight: 5)
 
-order_five = OrderOfService.create!(full_sender_address: 'Galpão Surf & Praia - Avenida Manoel Ribas, 634 - Pinhais PR',
-                                    product_length: 100, product_width: 100, product_height: 100,
-                                    recipient_full_address: 'Rua das Formigas, 100 - Florianópolis SC', recipients_name: 'Joana Siqueira',
-                                    distance: 315, product_weight: 500, status: :delivered, delivery_date: 10.days.ago, final_date: 1.day.ago)
-start_order_five = StartServiceOrder.create!(order_of_service_id: 5, carrier_id: 1, delivery_type: 'comum')
+order_five = OrderOfService.create!(full_sender_address: 'Galpão Aeroporto Afonso Pena - Rua das Araras, 2000 - São José dos Pinhais PR',
+                                    product_length: 31, product_width: 20, product_height: 11,
+                                    recipient_full_address: 'Rua das Cegonhas, 2541 - Curitiba PR', recipients_name: 'Roberto Quintana',
+                                    distance: 30, product_weight: 20)
+
+order_six = OrderOfService.create!(full_sender_address: 'Galpão Artes & Brinquedos - Rua das Bonecas, 541 - Curitiba PR',
+                                   product_length: 34, product_width: 27, product_height: 14,
+                                   recipient_full_address: 'Rua Figueiredo Assunção, 786 - Colombro PR', recipients_name: 'Heloisa Fagundes',
+                                   distance: 50, product_weight: 50)
+
+order_seven = OrderOfService.create!(full_sender_address: 'Galpão Materiais de Contrução - Rua Frederico Feijó, 854 - Pinhais PR',
+                                     product_length: 200, product_width: 200, product_height: 200,
+                                     recipient_full_address: 'Rua Joaquim da Peste - São Paulo SP', recipients_name: 'Roberto da Silva',
+                                     distance: 400, product_weight: 2500)
+
+order_eight = OrderOfService.create!(full_sender_address: 'Galpão Surf & Praia - Avenida Manoel Ribas, 634 - Pinhais PR',
+                                     product_length: 100, product_width: 100, product_height: 100,
+                                     recipient_full_address: 'Rua das Formigas, 100 - Florianópolis SC', recipients_name: 'Joana Siqueira',
+                                     distance: 315, product_weight: 500, status: :delivered, delivery_date: 10.days.ago, final_date: 1.day.ago, note: 'Acidente na estrada')
+start_order_eight = StartServiceOrder.create!(order_of_service_id: 8, carrier_id: 1, delivery_type: 'comum')
 
 # Criando tabela de preço por peso:
 first_line = PriceByWeight.create!(starting_weight: 1, final_weight: 10, price_per_km: 0.50)
