@@ -12,16 +12,16 @@
       <td><%= dt.deadline %> horas</td>
       <% if user_signed_in? %>
         <% if current_user.admin? %>
-          <td><%= link_to 'Editar', dt %>
-          <% end %>
+          <td><%= link_to 'Editar', edit_delivery_time_path(dt) %> </td>
         <% end %>
-      </tr>
-    <% end %>
-  </table>
-  <hr/>
-  <% if user_signed_in? %>
-    <% if current_user.admin? %>
-      <h3>Adicionar Novos Valores à Tabela:</h3>
-      <%= render 'form' %>
-    <% end %>
+      <% end %>
+    </tr>
   <% end %>
+</table>
+<hr/>
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <h3>Adicionar Novos Valores à Tabela:</h3>
+    <%= render 'form' %>
+  <% end %>
+<% end %>

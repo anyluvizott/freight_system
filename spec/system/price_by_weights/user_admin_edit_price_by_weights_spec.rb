@@ -13,9 +13,9 @@ describe 'Usuário Administrador edita um valor da tabela de preço por peso' do
     click_on 'Editar'
 
     expect(page).to have_content 'Editar valor da Tabela de Preço por Peso'
-    expect(page).to have_field 'Peso Inicial', with: '1'
-    expect(page).to have_field 'Peso Final', with: '10'
-    expect(page).to have_field 'Preço por Km', with: '0.5'
+    expect(page).to have_field 'Peso Inicial', with: 1
+    expect(page).to have_field 'Peso Final', with: 10
+    expect(page).to have_field 'Preço por Km', with: 0.5
   end
 
   it 'com sucesso' do
@@ -28,8 +28,8 @@ describe 'Usuário Administrador edita um valor da tabela de preço por peso' do
     visit root_path
     click_on 'Tabela de Preço por Peso'
     click_on 'Editar'
-    fill_in 'Peso Final',	with: '20'
-    fill_in 'Preço por Km',	with: '0.82'
+    fill_in 'Peso Final',	with: 20
+    fill_in 'Preço por Km',	with: 0.82
     click_on 'Enviar'
 
     expect(page).to have_content 'Valor atualizado com sucesso'

@@ -1,10 +1,10 @@
-    <% if(@price_per_distance.errors.any?) %>
+<% if(@price_per_distance.errors.any?) %>
   <p>Verifique os erros abaixo:</p>
   <ul>
     <% @price_per_distance.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
-    <% end %>
-  </ul>
+    </ul>
+  <% end %>
 <% end %>
 <%= form_with(model: @price_per_distance) do |f| %>
   <div>

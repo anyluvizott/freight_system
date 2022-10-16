@@ -12,16 +12,29 @@ class PricePerDistancesController < ApplicationController
     if @price_per_distance.save
       redirect_to price_per_distances_path, notice: 'Novo valor adicionado'
     else
-      flash.now[:alert] = 'Não foi possível adicionar novo valor'
-      render 'index'
+      redirect_to price_per_distances_path,
+                  alert: 'Não foi possível adicionar novo valor, os campos não podem ficar em branco'
     end
   end
 
-  def update; end
+  def edit
+    @price_per_distance = PricePerDistance.find(params[:id])
+  end
+
+  def update
+    @price_per_distance = PricePerDistance.find(params[:id])
+
+    if @price_per_distance.update(price_per_distances_params)
+      redirect_to price_per_distances_path, notice: 'Valor atualizado com sucesso'
+    else
+      flash.now[:alert] = 'Não foi possível atualizar'
+      render 'edit'
+    end
+  end
 
   private
 
   def price_per_distances_params
     params.require(:price_per_distance).permit(:starting_km, :final_km, :fixed_price)
-  end  
+  end
 end

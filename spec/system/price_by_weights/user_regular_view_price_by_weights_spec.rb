@@ -39,7 +39,7 @@ describe 'Usuário Regular tem acesso a tabela de preços' do
     expect(page).to have_content 'R$ 0,50'
 
     expect(page).not_to have_content 'Adicionar Novos Valores à Tabela'
-    expect(page).not_to have_link 'Enviar'
+    expect(page).not_to have_button 'Enviar'
   end
 
   it 'e não tem acesso a edição dos valores cadastrados' do
@@ -60,6 +60,6 @@ describe 'Usuário Regular tem acesso a tabela de preços' do
     expect(page).to have_content '10 kg'
     expect(page).to have_content 'R$ 0,50'
 
-    expect(page).not_to have_content 'Editar'
+    expect(page).not_to have_link 'Editar'
   end
 end

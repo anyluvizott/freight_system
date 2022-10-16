@@ -12,16 +12,16 @@
       <td><%= number_to_currency(pd.fixed_price) %></td>
       <% if user_signed_in? %>
         <% if current_user.admin? %>
-          <td><%= link_to 'Editar', pd %>
-          <% end %>
+          <td><%= link_to 'Editar', edit_price_per_distance_path(pd) %></td>
         <% end %>
-      </tr>
-    <% end %>
-  </table>
-  <hr/>
-  <% if user_signed_in? %>
-    <% if current_user.admin? %>
-      <h3>Adicionar Novos Valores à Tabela:</h3>
-      <%= render 'form' %>
-    <% end %>
+      <% end %>
+    </tr>
   <% end %>
+</table>
+<hr/>
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <h3>Adicionar Novos Valores à Tabela:</h3>
+    <%= render 'form' %>
+  <% end %>
+<% end %>
