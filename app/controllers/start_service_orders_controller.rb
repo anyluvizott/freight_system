@@ -14,7 +14,7 @@ class StartServiceOrdersController < ApplicationController
     if @start_service_order.save
       @carrier.on_delivery!
       @order_of_service.on_route!
-      @order_of_service.departure_date = Time.now
+      @order_of_service.final_date = Time.current
       @order_of_service.save
 
       redirect_to @order_of_service, notice: 'Entrega em Rota'

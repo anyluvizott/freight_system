@@ -9,6 +9,12 @@ RSpec.describe Carrier, type: :model do
         expect(utili.errors.include?(:drivers_name)).to be true
       end
 
+      it 'a placa de identificação deve ser obrigatório' do
+        utili = Carrier.new(nameplate: nil)
+        utili.valid?
+        expect(utili.errors.include?(:nameplate)).to be true
+      end
+
       it 'o modelo do veículo deve ser obrigatório' do
         utili = Carrier.new(vehicle_model: nil)
         utili.valid?

@@ -74,10 +74,10 @@ order_four = OrderOfService.create!(full_sender_address: 'Galpão Materiais de C
                                     recipient_full_address: 'Rua Joaquim da Peste - São Paulo SP', recipients_name: 'Roberto da Silva',
                                     distance: 400, product_weight: 2500)
 
-# order_five = OrderOfService.create!(full_sender_address: 'Galpão Surf & Praia - Avenida Manoel Ribas, 634 - Pinhais PR',
-  #                                  product_length: 100, product_width: 100, product_height: 100,
-  #                                  recipient_full_address: 'Rua das Formigas, 100 - Florianópolis SC', recipients_name: 'Joana Siqueira',
-  #                                  distance: 315, product_weight: 30)
+order_five = OrderOfService.create!(full_sender_address: 'Galpão Surf & Praia - Avenida Manoel Ribas, 634 - Pinhais PR',
+                                    product_length: 100, product_width: 100, product_height: 100,
+                                    recipient_full_address: 'Rua das Formigas, 100 - Florianópolis SC', recipients_name: 'Joana Siqueira',
+                                    distance: 315, product_weight: 500)
 
 # Criando tabela de preço por peso:
 first_line = PriceByWeight.create!(starting_weight: 1, final_weight: 10, price_per_km: 0.50)

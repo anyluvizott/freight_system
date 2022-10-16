@@ -53,7 +53,7 @@ class OrderOfServicesController < ApplicationController
 
   def delivered
     @order_of_service = OrderOfService.find(params[:id])
-    @order_of_service.delivery_date = Time.now
+    @order_of_service.delivery_date = Time.current
     @order_of_service.delivered!
     @carrier = Carrier.find(@order_of_service.start_service_order.carrier_id)
     @carrier.active!
@@ -97,7 +97,6 @@ class OrderOfServicesController < ApplicationController
     transport = []
     transport_name = []
     select_carriers.each do |tm|
-      puts(tm.transport_model.name)
       unless transport_name.include?(tm.transport_model.name)
         transport_name << tm.transport_model.name
         transport << tm

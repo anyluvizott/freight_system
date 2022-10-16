@@ -114,8 +114,8 @@ RSpec.describe OrderOfService, type: :model do
   end
 end
 
-describe 'Ordem de Serviço gera um código' do
-  it 'unico e aleatório para a ordem de serviço' do
+describe 'Ordem de Serviço gera um código para OS' do
+  it 'unico e aleatório' do
     admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
                          status: :admin)
 
@@ -144,8 +144,8 @@ describe 'Ordem de Serviço gera um código' do
   end
 end
 
-describe 'Ordem de Serviço gera um código' do
-  it 'unico e aleatório para o produto da carga' do
+describe 'Ordem de Serviço gera um código para o produto da carga' do
+  it 'unico e aleatório' do
     admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
                          status: :admin)
 
