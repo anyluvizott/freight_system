@@ -12,6 +12,7 @@ class OrderOfServicesController < ApplicationController
     @sum = sum
     @select_transport_model = select_transport_model
     @deadline = deadline
+    @timelimit = timelimit unless @order_of_service.final_date.nil?
     @carrier_start_service_order = carrier_start_service_order unless @order_of_service.start_service_order.nil?
 
   end
@@ -142,5 +143,10 @@ class OrderOfServicesController < ApplicationController
       deadline = dl.deadline if dl.final_km >= @order_of_service.distance
     end
     deadline
+  end
+
+  def timelimit
+    @order_of_service = OrderOfService.find(params[:id])
+    timelimit = (@order_of_service.final_date.hour-@order_of_service.delivery_date.hour).to_s.to_i
   end
 end

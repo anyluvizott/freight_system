@@ -20,3 +20,4 @@ pt-BR:
         order_service_code: "Código da Ordem de Serviço"
         distance: "Distância em km"
         product_weight: "Peso do Produto em kg"
+        note: "Observação"

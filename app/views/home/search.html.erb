@@ -15,10 +15,26 @@
     <dd><%= I18n.l(@order.delivery_date, format: "%d de %B de %Y") %></dd>
     <br>
   <% end %>
+  <% if @carrier != nil %>
+    <dt> Informações do Veículo </dt>
+    <dd> Motorista: <%= @carrier.drivers_name %> </dd>
+    <dd> Placa de Identificação: <%= @carrier.nameplate %> </dd>
+    <dd> Modelo do Veículo: <%= @carrier.vehicle_model %> </dd>
+    <br>
+  <% end %>
   <% if @order.delivered? %>
     <dt>Data de Entrega:</dt>
     <dd><%= I18n.l(@order.final_date, format: "%d de %B de %Y") %></dd>
     <br>
+  <% end %>
+  <% if @order.final_date != nil %>
+    <% if @order.note == nil %>
+      <dt> Entrega foi realizada dentro do prazo.</dt>
+    <% else %>
+      <dt>Entrega realizada com atraso. Motivo:</dt>
+      <dd><%= @order.note %></dd>
+      <br>
+    <% end %>
   <% end %>
   <dt><strong>Status:</dt>
     <dd><%= OrderOfService.human_attribute_name("status.#{@order.status}") %> </strong></dd>
