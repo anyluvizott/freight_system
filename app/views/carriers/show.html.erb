@@ -2,7 +2,7 @@
 <% if user_signed_in? %>
   <% if current_user.admin? %>
     <div>
-      <%= link_to 'Editar Veículo', edit_carrier_path(@carrier)%>
+      <%= link_to 'Editar Veículo', edit_carrier_path(@carrier), :class=>"link-dark"%>
     </div>
   <% end %>
 <% end %>
@@ -27,15 +27,15 @@
   <% if user_signed_in? %>
     <% if current_user.admin? %>
       <% if @carrier.active? %>
-        <%= button_to 'Veículo em Manutenção', under_maintenance_carrier_path(@carrier) %>
+        <%= button_to 'Veículo em Manutenção', under_maintenance_carrier_path(@carrier), :class => "btn btn-outline-dark" %>
       <% end %>
       <% if @carrier.under_maintenance? %>
-        <%= button_to 'Veículo Ativo', active_carrier_path(@carrier) %>
+        <%= button_to 'Veículo Ativo', active_carrier_path(@carrier), :class => "btn btn-outline-dark" %>
       <% end %>
     <% end %>
   <% end %>
 </div>
 <br>
 <div>
-  <%= link_to('Voltar', carriers_path) %>
+  <%= link_to 'Voltar', carriers_path, :class=>"link-dark" %>
 </div>

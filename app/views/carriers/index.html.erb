@@ -3,26 +3,29 @@
 <% if user_signed_in? %>
   <% if current_user.admin? %>
     <div>
-      <%= link_to 'Cadastrar Novo Veículo', new_carrier_path %>
+      <%= link_to 'Cadastrar Novo Veículo', new_carrier_path, :class=>"link-dark" %>
     </div>
+    <br>
   <% end %>
 <% end %>
 <div>
   <%= form_with(url: search_carriers_path, method: :get) do |f| %>
     <%= f.label :query, 'Buscar Veículo' %>
     <%= f.text_field :query %>
-    <%= f.submit 'Buscar' %>
+    <%= f.submit 'Buscar', :class => "btn btn-outline-dark" %>
   <% end %>
+  <br>
 </div>
 <div>
   <% if @carriers.any? %>
     <% @carriers.each do |carrier| %>
       <div>
         <dl>
-          <dt><%= link_to carrier.transport_model.name, carrier %> </dt>
+          <dt><%= link_to carrier.transport_model.name, carrier, :class=>"link-dark" %> </dt>
           <dd><%= carrier.drivers_name %> - <%= carrier.vehicle_model %> - <%= carrier.nameplate %> </dd>
           <dd><%= Carrier.human_attribute_name("status.#{carrier.status}") %> </dd>
         </dl>
+        <hr/>
       </div>
     <% end %>
   <% else %>

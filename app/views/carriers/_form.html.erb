@@ -38,6 +38,6 @@
     <%= f.collection_select :transport_model_id, @transport_models, :id, :name%>
   </div>
   <div>
-    <%= f.submit 'Enviar' %>
+    <%= f.submit 'Enviar', :class => "btn btn-outline-dark" %>
   </div>
 <% end %>

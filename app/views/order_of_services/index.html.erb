@@ -3,8 +3,9 @@
 <% if user_signed_in? %>
   <% if current_user.admin? %>
     <div>
-      <%= link_to 'Nova Ordem de Serviço', new_order_of_service_path %>
+      <%= link_to 'Nova Ordem de Serviço', new_order_of_service_path, :class=>"link-dark" %>
     </div>
+    <br>
   <% end %>
 <% end %>
 
@@ -12,8 +13,9 @@
 <%= form_with(url: search_order_of_services_path, method: :get) do |f| %>
 <%= f.label :query, 'Buscar Ordem de Serviço' %>
 <%= f.text_field :query %>
-<%= f.submit 'Buscar' %>
+<%= f.submit 'Buscar', :class => "btn btn-outline-dark" %>
 <% end %>
+<br>
 </div>
 
 <div>
@@ -21,7 +23,7 @@
     <% @order_of_services.each do |order| %>
       <dl>
         <dt>
-          <h3>Serviço <%= link_to order.order_service_code, order %> </h3>
+          <h4>Serviço <%= link_to order.order_service_code, order, :class=>"link-dark" %> </h4>
         </dt>
         <dd>
           <p>Carga de <%= order.product_weight%>kg para percorrer uma distância de <%= order.distance%>km </p>
@@ -33,6 +35,7 @@
           <p><strong>Status: <%= OrderOfService.human_attribute_name("status.#{order.status}") %> </strong></p>
         </dd>
       </dl>
+      <hr/>
     <% end %>
   <% end %>
   <div>

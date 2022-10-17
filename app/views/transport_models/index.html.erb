@@ -3,20 +3,21 @@
 <% if user_signed_in? %>
   <% if current_user.admin? %>
     <div>
-      <%= link_to 'Cadastrar Nova Modalidade de Transporte', new_transport_model_path %>
+      <%= link_to 'Cadastrar Nova Modalidade de Transporte', new_transport_model_path, :class=>"link-dark"%>
+      <br>
     </div>
   <% end %>
 <% end %>
-
 
 <div>
   <% if @transport_models.any? %>
     <% @transport_models.each do |model| %>
       <div>
-        <h2><%= link_to model.name, model %>
+        <h3><%= link_to model.name, model, :class=>"link-dark" %></h3>
+        <br>
       </div>
-      <% end %>
-    <% else %>
-      <p>Nenhuma Modalidade de Transporte Cadastrada.</p>
     <% end %>
+  <% else %>
+    <p>Nenhuma Modalidade de Transporte Cadastrada.</p>
+  <% end %>
 </div>

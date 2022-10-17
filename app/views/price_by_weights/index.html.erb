@@ -12,7 +12,7 @@
       <td><%= number_to_currency(pw.price_per_km) %></td>
       <% if user_signed_in? %>
         <% if current_user.admin? %>
-          <td><%= link_to 'Editar', edit_price_by_weight_path(pw) %>
+          <td><%= link_to 'Editar', edit_price_by_weight_path(pw), :class=>"link-dark" %>
           <% end %>
         <% end %>
       </tr>

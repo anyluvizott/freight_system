@@ -2,7 +2,7 @@
 <% if user_signed_in? %>
   <% if current_user.admin? %>
     <div>
-      <%= link_to 'Editar Ordem de Serviço', edit_order_of_service_path(@order_of_service)%>
+      <%= link_to 'Editar Ordem de Serviço', edit_order_of_service_path(@order_of_service), :class=>"link-dark"%>
     </div>
   <% end %>
 <% end %>
@@ -26,7 +26,7 @@
     <dd><%= OrderOfService.human_attribute_name("status.#{@order_of_service.status}") %> </strong></dd>
 </dl>
 <div>
-  <%= link_to('Voltar', order_of_services_path) %>
+  <%= link_to 'Voltar', order_of_services_path, :class=>"link-dark" %>
 </div>
 <% if @order_of_service.delivered? %>
   <h3> Ordem de Serviço Concluída! </h3>
@@ -47,7 +47,7 @@
           <div>
             <%= f.label :note %>
             <%= f.text_area :note %>
-            <%= f. submit 'Enviar'%>
+            <%= f. submit 'Enviar', :class => "btn btn-outline-dark"%>
           </div>
         <% end %>
       <% else %>
@@ -70,7 +70,7 @@
           <div>
             <%= f.label :note %>
             <%= f.text_area :note %>
-            <%= f. submit 'Enviar'%>
+            <%= f. submit 'Enviar', :class => "btn btn-outline-dark"%>
           </div>
         <% end %>
       <% else %>
@@ -93,7 +93,7 @@
           <div>
             <%= f.label :note %>
             <%= f.text_area :note %>
-            <%= f. submit 'Enviar'%>
+            <%= f. submit 'Enviar', :class => "btn btn-outline-dark"%>
           </div>
         <% end %>
       <% else %>
@@ -121,7 +121,7 @@
       <dd> Valor Total da Entrega: <%= number_to_currency((@carrier_start_service_order.transport_model.tax + @sum)*1.50) %></dd>
       <dd> Prazo de Entrega: <%= (@deadline * 0.50).to_i %> horas</dd>
     <% end %>
-    <%= button_to 'Marcar como Entregue', delivered_order_of_service_path(@order_of_service.id) %>
+    <%= button_to 'Marcar como Entregue', delivered_order_of_service_path(@order_of_service.id), :class => "btn btn-outline-dark" %>
   <% else %>
     <section id="start_service_orders">
       <h1>Realizar Entrega</h1>
@@ -168,7 +168,7 @@
             <br>
           </div>
           <div>
-            <%= f.submit 'Confirmar Entrega'%>
+            <%= f.submit 'Confirmar Entrega', :class => "btn btn-outline-dark"%>
           </div>
         <% end %>
       <% else %>

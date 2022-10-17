@@ -12,7 +12,7 @@
       <td><%= dt.deadline %> horas</td>
       <% if user_signed_in? %>
         <% if current_user.admin? %>
-          <td><%= link_to 'Editar', edit_delivery_time_path(dt) %> </td>
+          <td><%= link_to 'Editar', edit_delivery_time_path(dt), :class=>"link-dark" %> </td>
         <% end %>
       <% end %>
     </tr>

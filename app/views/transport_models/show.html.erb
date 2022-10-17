@@ -2,7 +2,7 @@
 <% if user_signed_in? %>
   <% if current_user.admin? %>
     <div>
-      <%= link_to 'Editar Modalidade', edit_transport_model_path(@transport_model)%>
+      <%= link_to 'Editar Modalidade', edit_transport_model_path(@transport_model), :class=>"link-dark"%>
     </div>
   <% end %>
 <% end %>
@@ -26,5 +26,5 @@
   </div>
 <% end %>
 <div>
-  <%= link_to('Voltar', transport_models_path) %>
+  <%= link_to 'Voltar', transport_models_path, :class=>"link-dark" %>
 </div>
