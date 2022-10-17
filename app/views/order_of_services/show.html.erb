@@ -1,9 +1,11 @@
 <hr/>
 <% if user_signed_in? %>
   <% if current_user.admin? %>
-    <div>
-      <%= link_to 'Editar Ordem de Serviço', edit_order_of_service_path(@order_of_service), :class=>"link-dark"%>
-    </div>
+    <% if @order_of_service.pending? %>
+      <div>
+        <%= link_to 'Editar Ordem de Serviço', edit_order_of_service_path(@order_of_service), :class=>"link-dark"%>
+      </div>
+    <% end %>
   <% end %>
 <% end %>
 <h2>Ordem de Serviço - Código <%= @order_of_service.order_service_code %></h2>
