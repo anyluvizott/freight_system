@@ -130,6 +130,8 @@ describe 'Usuário Regular inicia uma Ordem de Serviço' do
     expect(page).to have_content 'Entrega: Comum'
     expect(page).to have_content 'Valor Total da Entrega: R$ 36,50'
     expect(page).to have_content 'Prazo de Entrega: 48 horas'
+    expect(page).to have_button 'Marcar como Entregue'
+
   end
 
   it 'sem informar a modalidade da entrega' do
