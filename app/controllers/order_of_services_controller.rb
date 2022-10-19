@@ -14,11 +14,11 @@ class OrderOfServicesController < ApplicationController
     @deadline = deadline
     @timelimit = timelimit unless @order_of_service.final_date.nil?
     @carrier_start_service_order = carrier_start_service_order unless @order_of_service.start_service_order.nil?
-
   end
 
   def new
     @order_of_service = OrderOfService.new
+    redirect_to root_path, alert: 'Você não possui autorização para acessar essa página.' if current_user.regular?
   end
 
   def create
@@ -34,6 +34,7 @@ class OrderOfServicesController < ApplicationController
 
   def edit
     @order_of_service = OrderOfService.find(params[:id])
+    redirect_to root_path, alert: 'Você não possui autorização para acessar essa página.' if current_user.regular?
   end
 
   def update
@@ -147,6 +148,6 @@ class OrderOfServicesController < ApplicationController
 
   def timelimit
     @order_of_service = OrderOfService.find(params[:id])
-    timelimit = ((@order_of_service.final_date-@order_of_service.delivery_date)/1.hour).to_i
+    timelimit = ((@order_of_service.final_date - @order_of_service.delivery_date) / 1.hour).to_i
   end
 end

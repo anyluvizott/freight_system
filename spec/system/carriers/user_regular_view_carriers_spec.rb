@@ -39,8 +39,25 @@ describe 'Usuário Regular vê os veículos cadastrados' do
     expect(page).to have_content 'Rodoviário - Motocicleta'
     expect(page).to have_content 'Gabriela Almeida - Renault Master 2.3 DCI Furgão L1H1 - Diesel - KLO6S98'
     expect(page).to have_content 'Roberto Siqueira - Triciclo Sousa Mod. TR 150 - FDS5A44'
-    
+
     expect(page).not_to have_content 'Cadastrar Novo Veículo'
+  end
+
+  it 'e não tem acesso ao cadastro de novos veículos pela URL' do
+    transport = TransportModel.create!(name: 'Rodoviário - Utilitários', minimum_distance: 1, maximum_distance: 150,
+                                       minimum_weight: 100, maximum_weight: 2_000, tax: 50)
+
+    Carrier.create!(drivers_name: 'Gabriela Almeida', nameplate: 'KLO6S98',
+                    vehicle_model: 'Renault Master 2.3 DCI Furgão L1H1 - Diesel', vehicle_brand: 'Renault',
+                    year_of_manufacture: 2019, maximum_weight: 1_500, transport_model: transport)
+
+    regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular',
+                           status: :regular)
+    login_as(regular)
+    visit new_carrier_path
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você não possui autorização para acessar essa página.'
   end
 
   it 'e não existem veículos cadastrados' do

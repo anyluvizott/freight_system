@@ -20,7 +20,7 @@ describe 'Usuario Regular tem acesso a lista de Modalidades de Transporte' do
     expect(page).to have_content 'Rodoviário - Utilitários'
   end
 
-  it 'e não tem acesso ao cadastro de Modalidades de Tranporte' do
+  it 'e não tem acesso ao cadastro de Modalidades de Transporte' do
     regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular',
                            status: :regular)
 
@@ -39,5 +39,19 @@ describe 'Usuario Regular tem acesso a lista de Modalidades de Transporte' do
     expect(page).to have_content 'Rodoviário - Caminhão'
     expect(page).to have_content 'Rodoviário - Utilitários'
     expect(page).not_to have_content 'Cadastrar Nova Modalidade de Transporte'
+  end
+
+  it 'e não tem acesso ao cadastro de Modalidades de Tranporte pela URL' do
+    transport = TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 1000,
+                                       minimum_weight: 1, maximum_weight: 3_000, tax: 150)
+
+    regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular',
+                           status: :regular)
+
+    login_as(regular)
+    visit new_transport_model_path
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você não possui autorização para acessar essa página.'
   end
 end

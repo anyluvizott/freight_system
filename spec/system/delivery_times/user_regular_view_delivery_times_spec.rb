@@ -62,4 +62,17 @@ describe 'Usuário Regular tem acesso a tabela de prazos de entrega' do
 
     expect(page).not_to have_link 'Editar'
   end
+
+  it 'e não tem acesso a edição dos valores cadastrados pela URL' do
+    deadline = DeliveryTime.create!(starting_km: 1, final_km: 100, deadline: 48)
+
+    regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular',
+                           status: :regular)
+
+    login_as(regular)
+    visit edit_delivery_time_path(deadline.id)
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você não possui autorização para acessar essa página.'
+  end
 end

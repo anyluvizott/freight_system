@@ -19,6 +19,7 @@ class PricePerDistancesController < ApplicationController
 
   def edit
     @price_per_distance = PricePerDistance.find(params[:id])
+    redirect_to root_path, alert: 'Você não possui autorização para acessar essa página.' if current_user.regular?
   end
 
   def update

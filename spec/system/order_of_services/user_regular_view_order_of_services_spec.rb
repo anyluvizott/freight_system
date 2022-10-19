@@ -41,4 +41,15 @@ describe 'Usuário Regular visualiza as Ordens de Serviço' do
     expect(page).to have_content 'Saindo de Galpão das Frutas Tropicais - Rua das Maçãs, 150 - Curitiba PR para o destino de Rua das Laranjas, 253 - Curitiba PR'
     expect(page).not_to have_content 'Nova Ordem de Serviço'
   end
+
+  it 'e não tem acesso ao cadastro de nova ordem de serviço pela URL' do
+    regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular',
+                           status: :regular)
+
+    login_as(regular)
+    visit new_order_of_service_path
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você não possui autorização para acessar essa página.'
+  end
 end

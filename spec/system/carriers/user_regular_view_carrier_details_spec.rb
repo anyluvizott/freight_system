@@ -46,6 +46,23 @@ describe 'Usuário Regular vê detalhes dos veículos cadastrados' do
     expect(page).not_to have_content 'Editar Veículo'
   end
 
+  it 'e não tem acesso a edição do veiculo cadastrado pela URL' do
+    transport = TransportModel.create!(name: 'Rodoviário - Utilitários', minimum_distance: 1, maximum_distance: 150,
+                                       minimum_weight: 100, maximum_weight: 2_000, tax: 50)
+
+    car = Carrier.create!(drivers_name: 'Gabriela Almeida', nameplate: 'KLO6S98',
+                          vehicle_model: 'Renault Master 2.3 DCI Furgão L1H1 - Diesel', vehicle_brand: 'Renault',
+                          year_of_manufacture: 2019, maximum_weight: 1_500, transport_model: transport)
+
+    regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular',
+                           status: :regular)
+    login_as(regular)
+    visit edit_carrier_path(car.id)
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você não possui autorização para acessar essa página.'
+  end
+
   it 'e volta para a tela inicial' do
     regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular',
                            status: :regular)

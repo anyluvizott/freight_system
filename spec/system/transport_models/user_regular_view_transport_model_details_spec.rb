@@ -36,4 +36,18 @@ describe 'Usuário Regular tem acesso aos detalhes da Modalidade de Transporte' 
 
     expect(page).not_to have_content 'Editar Modalidade'
   end
+
+  it 'e não tem acesso a edição dos detalhes da Modalidade de Tranporte pela URL' do
+    transport = TransportModel.create!(name: 'Rodoviário - Caminhão', minimum_distance: 1, maximum_distance: 1000,
+                                       minimum_weight: 1, maximum_weight: 3_000, tax: 150)
+
+    regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular',
+                           status: :regular)
+
+    login_as(regular)
+    visit edit_transport_model_path(transport.id)
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você não possui autorização para acessar essa página.'
+  end
 end

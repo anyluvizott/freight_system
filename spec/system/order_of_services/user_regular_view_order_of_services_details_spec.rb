@@ -53,4 +53,20 @@ describe 'Usuário Regular visualiza os detalhes da Ordens de Serviço' do
     expect(page).to have_link 'Voltar'
     expect(page).not_to have_link 'Editar Ordem de Serviço'
   end
+
+  it 'e não tem acesso edição da ordem de serviço pela URL' do
+    order = OrderOfService.create!(full_sender_address: 'Galpão das Frutas Tropicais - Rua das Maçãs, 150 - Curitiba PR',
+                                   product_length: 25, product_width: 17, product_height: 8,
+                                   recipient_full_address: 'Rua das Laranjas, 253 - Curitiba PR', recipients_name: 'Flora Mendes',
+                                   distance: 15, product_weight: 5)
+
+    regular = User.create!(email: 'regular@sistemadefrete.com.br', password: 'password', name: 'Regular',
+                           status: :regular)
+
+    login_as(regular)
+    visit edit_order_of_service_path(order.id)
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você não possui autorização para acessar essa página.'
+  end
 end

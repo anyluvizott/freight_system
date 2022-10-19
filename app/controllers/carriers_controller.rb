@@ -1,6 +1,6 @@
 class CarriersController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @carriers = Carrier.all
   end
@@ -12,6 +12,7 @@ class CarriersController < ApplicationController
   def new
     @carrier = Carrier.new
     @transport_models = TransportModel.all
+    redirect_to root_path, alert: 'Você não possui autorização para acessar essa página.' if current_user.regular?
   end
 
   def create
@@ -28,6 +29,7 @@ class CarriersController < ApplicationController
   def edit
     @carrier = Carrier.find(params[:id])
     @transport_models = TransportModel.all
+    redirect_to root_path, alert: 'Você não possui autorização para acessar essa página.' if current_user.regular?
   end
 
   def update

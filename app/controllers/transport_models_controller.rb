@@ -1,6 +1,6 @@
 class TransportModelsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @transport_models = TransportModel.all
   end
@@ -11,6 +11,7 @@ class TransportModelsController < ApplicationController
 
   def new
     @transport_model = TransportModel.new
+    redirect_to root_path, alert: 'Você não possui autorização para acessar essa página.' if current_user.regular?
   end
 
   def create
@@ -25,6 +26,7 @@ class TransportModelsController < ApplicationController
 
   def edit
     @transport_model = TransportModel.find(params[:id])
+    redirect_to root_path, alert: 'Você não possui autorização para acessar essa página.' if current_user.regular?
   end
 
   def update
