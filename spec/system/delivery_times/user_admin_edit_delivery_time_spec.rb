@@ -59,4 +59,44 @@ describe 'Usuário Administrador edita um valor da tabela de prazo de entrega' d
     expect(page).to have_content 'Prazo de Entrega não pode ficar em branco'
     expect(page).not_to have_content 'Valor atualizado com sucesso'
   end
+
+  it 'com valor inicial já inserido na tabela' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+    first_deadline = DeliveryTime.create!(starting_km: 1, final_km: 100, deadline: 48)
+    second_deadline = DeliveryTime.create!(starting_km: 101, final_km: 300, deadline: 96)
+
+    login_as(admin)
+    visit root_path
+    click_on 'Tabela de Prazo de Entrega'
+    first(:link, 'Editar').click
+    fill_in 'Km Inicial',	with: 120
+    fill_in 'Km Final',	with: 350
+    fill_in 'Prazo de Entrega',	with: 100
+    click_on 'Enviar'
+
+    expect(page).to have_content 'Não foi possível atualizar'
+    expect(page).to have_content 'Km Inicial não pode já estar incluido na tabela'
+    expect(page).not_to have_content 'Valor atualizado com sucesso'
+  end
+
+  it 'com valor final já inserido na tabela' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+    first_deadline = DeliveryTime.create!(starting_km: 1, final_km: 100, deadline: 48)
+    second_deadline = DeliveryTime.create!(starting_km: 101, final_km: 300, deadline: 96)
+
+    login_as(admin)
+    visit root_path
+    click_on 'Tabela de Prazo de Entrega'
+    first(:link, 'Editar').click
+    fill_in 'Km Inicial',	with: 1
+    fill_in 'Km Final',	with: 120
+    fill_in 'Prazo de Entrega',	with: 100
+    click_on 'Enviar'
+
+    expect(page).to have_content 'Não foi possível atualizar'
+    expect(page).to have_content 'Km Final não pode já estar incluido na tabela'
+    expect(page).not_to have_content 'Valor atualizado com sucesso'
+  end
 end

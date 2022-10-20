@@ -13,7 +13,7 @@ class DeliveryTimesController < ApplicationController
       redirect_to delivery_times_path, notice: 'Novo valor adicionado'
     else
       redirect_to delivery_times_path,
-                  alert: 'Não foi possível adicionar novo valor, os campos não podem ficar em branco'
+                  alert: 'Não foi possível adicionar novo valor'
     end
   end
 

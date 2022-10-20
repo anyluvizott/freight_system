@@ -13,7 +13,7 @@ class PricePerDistancesController < ApplicationController
       redirect_to price_per_distances_path, notice: 'Novo valor adicionado'
     else
       redirect_to price_per_distances_path,
-                  alert: 'Não foi possível adicionar novo valor, os campos não podem ficar em branco'
+                  alert: 'Não foi possível adicionar novo valor'
     end
   end
 

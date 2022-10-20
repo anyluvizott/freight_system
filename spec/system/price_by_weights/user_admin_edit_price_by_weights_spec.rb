@@ -61,4 +61,46 @@ describe 'Usuário Administrador edita um valor da tabela de preço por peso' do
     expect(page).to have_content 'Peso Final não pode ficar em branco'
     expect(page).to have_content 'Preço por Km não pode ficar em branco'
   end
+
+  it 'com valor inicial já inserido na tabela' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
+    first_line = PriceByWeight.create!(starting_weight: 1, final_weight: 10, price_per_km: 0.50)
+    second_line = PriceByWeight.create!(starting_weight: 11, final_weight: 50, price_per_km: 0.80)
+
+    login_as(admin)
+    visit root_path
+    click_on 'Tabela de Preço por Peso'
+    first(:link, 'Editar').click
+    fill_in 'Peso Inicial',	with: 15
+    fill_in 'Peso Final',	with: 60
+    fill_in 'Preço por Km',	with: 0.90
+    click_on 'Enviar'
+
+    expect(page).to have_content 'Não foi possível atualizar'
+    expect(page).to have_content 'Peso Inicial não pode já estar incluido na tabela'
+    expect(page).not_to have_content 'Valor atualizado com sucesso'
+  end
+
+  it 'com valor final já inserido na tabela' do
+    admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
+                         status: :admin)
+
+    first_line = PriceByWeight.create!(starting_weight: 1, final_weight: 10, price_per_km: 0.50)
+    second_line = PriceByWeight.create!(starting_weight: 11, final_weight: 50, price_per_km: 0.80)
+
+    login_as(admin)
+    visit root_path
+    click_on 'Tabela de Preço por Peso'
+    first(:link, 'Editar').click
+    fill_in 'Peso Inicial',	with: 1
+    fill_in 'Peso Final',	with: 15
+    fill_in 'Preço por Km',	with: 0.90
+    click_on 'Enviar'
+
+    expect(page).to have_content 'Não foi possível atualizar'
+    expect(page).to have_content 'Peso Final não pode já estar incluido na tabela'
+    expect(page).not_to have_content 'Valor atualizado com sucesso'
+  end
 end
