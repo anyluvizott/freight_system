@@ -21,6 +21,12 @@ RSpec.describe DeliveryTime, type: :model do
         expect(deadline.errors.include?(:starting_km)).to be true
       end
 
+      it 'o km inicial deve ser menor do que o km final' do
+        deadline = DeliveryTime.new(starting_km: 10, final_km: 5)
+        deadline.valid?
+        expect(deadline.errors.include?(:starting_km)).to be true
+      end
+
       it 'o km final deve ser obrigatório' do
         deadline = DeliveryTime.new(final_km: nil)
         deadline.valid?

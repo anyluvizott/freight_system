@@ -21,6 +21,12 @@ RSpec.describe PricePerDistance, type: :model do
         expect(price_per_distance.errors.include?(:starting_km)).to be true
       end
 
+      it 'o km inicial deve ser menor do que o km final' do
+        price_per_distance = PricePerDistance.new(starting_km: 10, final_km: 5)
+        price_per_distance.valid?
+        expect(price_per_distance.errors.include?(:starting_km)).to be true
+      end
+
       it 'o km final deve ser obrigatório' do
         price_per_distance = PricePerDistance.new(final_km: nil)
         price_per_distance.valid?

@@ -22,7 +22,3 @@ Rails.application.routes.draw do
     get 'search', on: :collection
   end
 end
-
-# Prefix                         Verb                         URI Pattern          Controller#Action
-# order_of_service_start_service_orders POST   /order_of_services/:order_of_service_id/start_service_orders(.:format) start_service_orders#create
-# search_carriers GET    /carriers/search(.:format)   carriers#search

@@ -21,6 +21,12 @@ RSpec.describe PriceByWeight, type: :model do
         expect(price_by_weight.errors.include?(:starting_weight)).to be true
       end
 
+      it 'o peso inicial deve ser menor do que o peso final' do
+        price_by_weight = PriceByWeight.new(starting_weight: 10, final_weight: 5)
+        price_by_weight.valid?
+        expect(price_by_weight.errors.include?(:starting_weight)).to be true
+      end
+
       it 'o peso final deve ser obrigatório' do
         price_by_weight = PriceByWeight.new(final_weight: nil)
         price_by_weight.valid?
