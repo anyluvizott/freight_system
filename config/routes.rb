@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :delivery_times, only: %i[index create edit update]
   
-  resources :model_types, only: %i[index create edit update]
+  resources :model_types, only: %i[new create edit update]
 
   resources :order_of_services, only: %i[index show new create edit update] do
     resources :start_service_orders, only: [:create]

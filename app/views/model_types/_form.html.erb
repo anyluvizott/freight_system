@@ -1,0 +1,31 @@
+<% if(@model_type.errors.any?) %>
+  <p> Verifique os erros abaixo: </p>
+  <ul>
+    <% @model_type.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: @model_type) do |mt| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :starting_km %>
+    <%= f.number_field :starting_km %>
+  </div>
+  <div>
+    <%= f.label :final_km %>
+    <%= f.number_field :final_km %>
+  </div>
+  <div>
+    <%= f.label :deadline %>
+    <%= f.number_field :deadline %>
+  </div>
+  <div>
+    <%= f.label :transport_model_id %>
+    <%= f.collection_select :transport_model_id, @transport_models, :id, :name %>
+  </div>
+<% end %>
