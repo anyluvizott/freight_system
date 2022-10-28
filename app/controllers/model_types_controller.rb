@@ -1,6 +1,10 @@
-class ModelTypeController < ApplicationController
+class ModelTypesController < ApplicationController
   before_action :authenticate_user!
   before_action :restriction_for_regular_user
+
+  def show
+    @model_type = ModelType.find(params[:id])
+  end
 
   def new
     @model_type = ModelType.new
@@ -11,20 +15,19 @@ class ModelTypeController < ApplicationController
     @model_type = ModelType.new(model_type_params)
 
     if @model_type.save
-      redirect_to new_model_type_path, notice: "Novo Tipo de Modalidade adicionado com sucesso"
+      redirect_to model_type_path(@model_type), notice: 'Novo Tipo de Modalidade de Entrega cadastrada com sucesso'
     else
-      redirect_to new_model_type_path, alert: "Não foi possível adicionar o Tipo de Modalidade"
+      @transport_models = TransportModel.all
+      flash.now[:alert] = 'Não foi possível adicionar o Tipo de Modalidade de Entrega'
+      render 'new'
+    end
   end
 
-  def edit
+  def edit; end
 
-  end
+  def update; end
 
-  def update
-
-  end
-
-  private 
+  private
 
   def model_type_params
     params.require(:model_type).permit(:name, :starting_km, :final_km, :deadline, :transport_model_id)
@@ -33,5 +36,4 @@ class ModelTypeController < ApplicationController
   def restriction_for_regular_user
     redirect_to root_path, alert: 'Você não possui autorização para acessar essa página.' if current_user.regular?
   end
-
 end

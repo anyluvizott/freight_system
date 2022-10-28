@@ -1,0 +1,21 @@
+<h1>Tabela de Modalidade de Entrega</h1>
+<hr/>
+<table>
+  <tr>
+    <td> Modalidade de Transporte: </td>
+    <td> Tipo de Modalidade de Entrega: </td>
+    <td> Distância Inicial: </td>
+    <td> Distância Final: </td>
+    <td> Tempo de Entrega: </td>
+  </tr>
+  <tr>
+    <td> <%= @model_type.transport_model.name %> </td>
+    <td><%= @model_type.name %></td>
+    <td><%= @model_type.starting_km %> km</td>
+    <td><%= @model_type.final_km %> km</td>
+    <td><%= @model_type.deadline %> horas</td>
+    <% if current_user.admin? %>
+      <td><%= link_to 'Editar', edit_model_type_path(@model_type), :class=>"link-dark" %></td>
+    <% end %>
+  </tr>
+</table>

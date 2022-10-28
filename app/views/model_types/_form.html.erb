@@ -9,23 +9,26 @@
 
 <%= form_with(model: @model_type) do |mt| %>
   <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= mt.label :name %>
+    <%= mt.text_field :name %>
   </div>
   <div>
-    <%= f.label :starting_km %>
-    <%= f.number_field :starting_km %>
+    <%= mt.label :starting_km %>
+    <%= mt.number_field :starting_km %>
   </div>
   <div>
-    <%= f.label :final_km %>
-    <%= f.number_field :final_km %>
+    <%= mt.label :final_km %>
+    <%= mt.number_field :final_km %>
   </div>
   <div>
-    <%= f.label :deadline %>
-    <%= f.number_field :deadline %>
+    <%= mt.label :deadline %>
+    <%= mt.number_field :deadline %>
   </div>
   <div>
-    <%= f.label :transport_model_id %>
-    <%= f.collection_select :transport_model_id, @transport_models, :id, :name %>
+    <%= mt.label :transport_model_id %>
+    <%= mt.collection_select :transport_model_id, @transport_models, :id, :name %>
+  </div>
+  <div>
+    <%= mt.submit "Enviar" %>
   </div>
 <% end %>

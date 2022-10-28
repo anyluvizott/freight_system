@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      model_type: "Tipo de Modalidade de Entrega"
+    attributes:
+      model_type:
+        name: "Nome"
+        starting_km: "Distância Inicial"
+        final_km: "Distância Final"
+        deadline: "Tempo de Entrega"
+        transport_model: "Modalidade de Transporte"
+        transport_model_id: "Modalidade de Transporte"

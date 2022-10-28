@@ -19,6 +19,30 @@
   <dt>Taxa Fixa de Entrega:</dt>
   <dd>R$ <%= @transport_model.tax %>,00</dd>
 </dl>
+
+<hr/>
+<h2>Tabela das Modalidades de Entrega cadastradas para essa Modalidade de Transporte</h2>
+<table>
+  <tr>
+    <td> Tipo de Modalidade: </td>
+    <td> Distância Inicial: </td>
+    <td> Distância Final: </td>
+    <td> Tempo de Entrega: </td>
+  </tr>
+  <% @transport_model.model_types.each do |md| %>
+    <tr>
+      <td><%= md.name %></td>
+      <td><%= md.starting_km %> km</td>
+      <td><%= md.final_km %> km</td>
+      <td><%= md.deadline %> horas</td>
+      <% if current_user.admin? %>
+        <td><%= link_to 'Editar', edit_model_type_path(md), :class=>"link-dark" %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<hr/>
 <h2>Veículos Cadastrados nessa Modalidade:</h2>
 <% @transport_model.carriers.each do |carrier| %>
   <div>
