@@ -12,12 +12,10 @@
   <dt>Taxa Fixa de Entrega:</dt>
   <dd>R$ <%= @transport_model.tax %>,00</dd>
 </dl>
-<% if user_signed_in? %>
-  <% if current_user.admin? %>
-    <div>
-      <%= link_to "Editar Modalidade #{@transport_model.name}", edit_transport_model_path(@transport_model), :class=>"link-dark"%>
-    </div>
-  <% end %>
+<% if current_user.admin? %>
+  <div>
+    <%= link_to "Editar Modalidade #{@transport_model.name}", edit_transport_model_path(@transport_model), :class=>"link-dark"%>
+  </div>
 <% end %>
 <hr/>
 <h2>Modalidades de Entregas</h2>
@@ -40,9 +38,13 @@
     </tr>
   <% end %>
 </table>
-<%= link_to "Cadastrar Novo Tipo de Modalidade de Entrega", new_model_type_path, :class=>"link-dark" %>
+<% if current_user.admin? %>
+  <div>
+    <%= link_to "Cadastrar Novo Tipo de Modalidade de Entrega", new_model_type_path, :class=>"link-dark" %>
+  </div>
+<% end %>
 <hr/>
-<h2>Veículos Cadastrados nessa Modalidade:</h2>
+<h2>Veículos Cadastrados nessa Modalidade</h2>
 <% @transport_model.carriers.each do |carrier| %>
   <div>
     <%= carrier.drivers_name %> - <%= carrier.vehicle_model %> <%= carrier.nameplate %>
