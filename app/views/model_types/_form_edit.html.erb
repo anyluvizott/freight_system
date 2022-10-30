@@ -25,10 +25,6 @@
     <%= mt.number_field :deadline %>
   </div>
   <div>
-    <%= mt.label :transport_model_id %>
-    <%= mt.collection_select :transport_model_id, @transport_models, :id, :name %>
-  </div>
-  <div>
     <%= mt.submit "Enviar" %>
   </div>
 <% end %>

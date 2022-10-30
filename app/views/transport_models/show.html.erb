@@ -1,11 +1,4 @@
 <hr/>
-<% if user_signed_in? %>
-  <% if current_user.admin? %>
-    <div>
-      <%= link_to 'Editar Modalidade', edit_transport_model_path(@transport_model), :class=>"link-dark"%>
-    </div>
-  <% end %>
-<% end %>
 <h1><%= @transport_model.name %></h1>
 <dl>
   <dt>Distância Mínima Percorrida:</dt>
@@ -19,15 +12,21 @@
   <dt>Taxa Fixa de Entrega:</dt>
   <dd>R$ <%= @transport_model.tax %>,00</dd>
 </dl>
-
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <div>
+      <%= link_to "Editar Modalidade #{@transport_model.name}", edit_transport_model_path(@transport_model), :class=>"link-dark"%>
+    </div>
+  <% end %>
+<% end %>
 <hr/>
-<h2>Tabela das Modalidades de Entrega cadastradas para essa Modalidade de Transporte</h2>
+<h2>Modalidades de Entregas</h2>
 <table>
   <tr>
-    <td> Tipo de Modalidade: </td>
-    <td> Distância Inicial: </td>
-    <td> Distância Final: </td>
-    <td> Tempo de Entrega: </td>
+    <td> Tipo de Modalidade </td>
+    <td> Distância Inicial </td>
+    <td> Distância Final </td>
+    <td> Tempo de Entrega </td>
   </tr>
   <% @transport_model.model_types.each do |md| %>
     <tr>
@@ -36,12 +35,12 @@
       <td><%= md.final_km %> km</td>
       <td><%= md.deadline %> horas</td>
       <% if current_user.admin? %>
-        <td><%= link_to 'Editar', edit_model_type_path(md), :class=>"link-dark" %></td>
+        <td><%= link_to 'Editar Tipo de Entrega', edit_model_type_path(md), :class=>"link-dark" %></td>
       <% end %>
     </tr>
   <% end %>
 </table>
-
+<%= link_to "Cadastrar Novo Tipo de Modalidade de Entrega", new_model_type_path, :class=>"link-dark" %>
 <hr/>
 <h2>Veículos Cadastrados nessa Modalidade:</h2>
 <% @transport_model.carriers.each do |carrier| %>

@@ -23,9 +23,21 @@ class ModelTypesController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @model_type = ModelType.find(params[:id])
+  end
 
-  def update; end
+  def update
+    @model_type = ModelType.find(params[:id])
+
+    if @model_type.update(model_type_params)
+      redirect_to @model_type, notice: 'Tipo de Modelo de Entrega atualizado com sucesso'
+    else
+
+      flash.now[:alert] = 'Não foi possível atualizar'
+      render 'edit'
+    end
+  end
 
   private
 

@@ -17,13 +17,13 @@ describe 'Usuário Administrador visualiza os tipos de modalidades de entrega' d
     click_on 'Rodoviário - Bicicleta'
 
     expect(page).to have_content 'Rodoviário - Bicicleta'
-    expect(page).to have_content 'Tipo de Modalidade:'
+    expect(page).to have_content 'Tipo de Modalidade'
     expect(page).to have_content 'Entrega Comum'
-    expect(page).to have_content 'Distância Inicial:'
+    expect(page).to have_content 'Distância Inicial'
     expect(page).to have_content '1 km'
-    expect(page).to have_content 'Distância Final:'
+    expect(page).to have_content 'Distância Final'
     expect(page).to have_content '15 km'
-    expect(page).to have_content 'Tempo de Entrega:'
+    expect(page).to have_content 'Tempo de Entrega'
     expect(page).to have_content '48 horas'
     expect(page).to have_link 'Editar'
   end
@@ -49,13 +49,13 @@ describe 'Usuário Administrador visualiza os tipos de modalidades de entrega' d
     click_on 'Rodoviário - Bicicleta'
 
     expect(page).to have_content 'Rodoviário - Bicicleta'
-    expect(page).to have_content 'Tipo de Modalidade:'
+    expect(page).to have_content 'Tipo de Modalidade'
     expect(page).to have_content 'Entrega Comum'
-    expect(page).to have_content 'Distância Inicial:'
+    expect(page).to have_content 'Distância Inicial'
     expect(page).to have_content '1 km'
-    expect(page).to have_content 'Distância Final:'
+    expect(page).to have_content 'Distância Final'
     expect(page).to have_content '15 km'
-    expect(page).to have_content 'Tempo de Entrega:'
+    expect(page).to have_content 'Tempo de Entrega'
     expect(page).to have_content '48 horas'
     expect(page).not_to have_content 'Rodoviário - Motocicleta'
     expect(page).not_to have_content 'Entrega Expressa'
@@ -70,9 +70,13 @@ describe 'Usuário Administrador cadastra um novo tipo de modalidade de entrega'
     admin = User.create!(email: 'admin@sistemadefrete.com.br', password: 'password', name: 'Administrador',
                          status: :admin)
 
+    car = TransportModel.create!(name: 'Rodoviário - Utilitários', minimum_distance: 20, maximum_distance: 500,
+                                 minimum_weight: 50, maximum_weight: 2000, tax: 50)
+
     login_as(admin)
     visit root_path
     click_on 'Modalidades de Transporte'
+    click_on 'Rodoviário - Utilitários'
     click_on 'Cadastrar Novo Tipo de Modalidade de Entrega'
 
     expect(current_path).to eq new_model_type_path
@@ -95,6 +99,7 @@ describe 'Usuário Administrador cadastra um novo tipo de modalidade de entrega'
     login_as(admin)
     visit root_path
     click_on 'Modalidades de Transporte'
+    click_on 'Rodoviário - Utilitários'
     click_on 'Cadastrar Novo Tipo de Modalidade de Entrega'
     fill_in 'Nome',	with: 'Entrega Comum'
     fill_in 'Distância Inicial',	with: '20'
@@ -105,12 +110,12 @@ describe 'Usuário Administrador cadastra um novo tipo de modalidade de entrega'
 
     expect(current_path).to eq model_type_path(1)
     expect(page).to have_content 'Novo Tipo de Modalidade de Entrega cadastrada com sucesso'
-    expect(page).to have_content 'Tabela de Modalidade de Entrega'
-    expect(page).to have_content 'Modalidade de Transporte:'
-    expect(page).to have_content 'Tipo de Modalidade de Entrega:'
-    expect(page).to have_content 'Distância Inicial:'
-    expect(page).to have_content 'Distância Final:'
-    expect(page).to have_content 'Tempo de Entrega:'
+    expect(page).to have_content 'Modalidade de Entrega'
+    expect(page).to have_content 'Modalidade de Transporte'
+    expect(page).to have_content 'Tipo de Entrega'
+    expect(page).to have_content 'Distância Inicial'
+    expect(page).to have_content 'Distância Final'
+    expect(page).to have_content 'Tempo de Entrega'
     expect(page).to have_content 'Rodoviário - Utilitários'
     expect(page).to have_content 'Entrega Comum'
     expect(page).to have_content '20 km'
@@ -129,6 +134,7 @@ describe 'Usuário Administrador cadastra um novo tipo de modalidade de entrega'
     login_as(admin)
     visit root_path
     click_on 'Modalidades de Transporte'
+    click_on 'Rodoviário - Utilitários'
     click_on 'Cadastrar Novo Tipo de Modalidade de Entrega'
     fill_in 'Nome',	with: nil
     fill_in 'Distância Inicial',	with: nil
