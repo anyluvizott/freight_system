@@ -3,6 +3,7 @@ class DeliveryTime < ApplicationRecord
 
   validates :starting_km, :final_km, :deadline, presence: true
   validates :starting_km, :final_km, :deadline, numericality: { only_integer: true, greater_than: 0 }
+  
   validate :starting_value
   validate :different_initial_value_create, on: :create
   validate :different_final_value_create, on: :create

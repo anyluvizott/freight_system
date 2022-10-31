@@ -25,6 +25,7 @@
     <td> Distância Inicial </td>
     <td> Distância Final </td>
     <td> Tempo de Entrega </td>
+    <td> Status </td>
   </tr>
   <% @transport_model.model_types.each do |md| %>
     <tr>
@@ -32,12 +33,20 @@
       <td><%= md.starting_km %> km</td>
       <td><%= md.final_km %> km</td>
       <td><%= md.deadline %> horas</td>
+      <td><%=  ModelType.human_attribute_name("status.#{md.status}") %>
+
       <% if current_user.admin? %>
-        <td><%= link_to 'Editar Tipo de Entrega', edit_model_type_path(md), :class=>"link-dark" %></td>
+        <td><%= link_to 'Editar Tipo de Entrega', edit_model_type_path(md), :class=>"link-dark" %>
+          <% if md.active? %>
+            <%= button_to 'Inativar', inactive_model_type_path(md), :class => "btn btn-outline-dark" %> </td>
+        <% else %>
+          <%= button_to 'Ativar', active_model_type_path(md), :class => "btn btn-outline-dark" %> </td>
       <% end %>
-    </tr>
-  <% end %>
+    <% end %>
+  </tr>
+<% end %>
 </table>
+
 <% if current_user.admin? %>
   <div>
     <%= link_to "Cadastrar Novo Tipo de Modalidade de Entrega", new_model_type_path, :class=>"link-dark" %>

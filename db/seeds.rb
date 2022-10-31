@@ -101,7 +101,7 @@ first_line = PriceByWeight.create!(starting_weight: 1, final_weight: 10, price_p
 second_line = PriceByWeight.create!(starting_weight: 11, final_weight: 50, price_per_km: 0.80)
 third_line = PriceByWeight.create!(starting_weight: 51, final_weight: 100, price_per_km: 1.10)
 fourth_line = PriceByWeight.create!(starting_weight: 101, final_weight: 1000, price_per_km: 1.75)
-fifth_line = PriceByWeight.create!(starting_weight: 1000, final_weight: 3000, price_per_km: 2.10)
+fifth_line = PriceByWeight.create!(starting_weight: 1001, final_weight: 3000, price_per_km: 2.10)
 
 # Criando tabela de preço por distância:
 line_one = PricePerDistance.create!(starting_km: 1, final_km: 50, fixed_price: 9)
@@ -114,3 +114,19 @@ first_deadline = DeliveryTime.create!(starting_km: 1, final_km: 100, deadline: 4
 second_deadline = DeliveryTime.create!(starting_km: 101, final_km: 300, deadline: 96)
 third_deadline = DeliveryTime.create!(starting_km: 301, final_km: 500, deadline: 120)
 fourth_deadline = DeliveryTime.create!(starting_km: 501, final_km: 1000, deadline: 240)
+
+# Criando Modalidades de Entrega
+model_type_one = ModelType.create!(name: 'Entrega Comum', starting_km: 1, final_km: 15, deadline: 48,
+                                   transport_model: transport_four)
+
+model_type_two = ModelType.create!(name: 'Entrega Expressa', starting_km: 1, final_km: 15, deadline: 24,
+                                   transport_model: transport_four)
+
+model_type_three = ModelType.create!(name: 'Entrega Comum', starting_km: 10, final_km: 200, deadline: 96,
+                                     transport_model: transport_three)
+
+model_type_four = ModelType.create!(name: 'Entrega Comum', starting_km: 20, final_km: 500, deadline: 120,
+                                    transport_model: transport_two)
+
+model_type_five = ModelType.create!(name: 'Entrega Comum', starting_km: 100, final_km: 1000, deadline: 240,
+                                    transport_model: transport_one)

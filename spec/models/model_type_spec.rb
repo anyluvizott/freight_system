@@ -27,6 +27,12 @@ RSpec.describe ModelType, type: :model do
         expect(model_type.errors.include?(:starting_km)).to be true
       end
 
+      it 'a distância inicial deve ser menor do que a distância final' do
+        model_type = ModelType.new(starting_km: 5, final_km: 2)
+        model_type.valid?
+        expect(model_type.errors.include?(:starting_km)).to be true
+      end
+
       it 'a distância final deve ser obrigatório' do
         model_type = ModelType.new(final_km: nil)
         model_type.valid?

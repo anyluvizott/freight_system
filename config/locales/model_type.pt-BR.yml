@@ -3,6 +3,9 @@ pt-BR:
     models:
       model_type: "Tipo de Modalidade de Entrega"
     attributes:
+      model_type/status:
+        active: "Ativo"
+        inactive: "Inativo"
       model_type:
         name: "Nome"
         starting_km: "Distância Inicial"
@@ -10,3 +13,4 @@ pt-BR:
         deadline: "Tempo de Entrega"
         transport_model: "Modalidade de Transporte"
         transport_model_id: "Modalidade de Transporte"
+

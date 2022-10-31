@@ -39,6 +39,20 @@ class ModelTypesController < ApplicationController
     end
   end
 
+  def active
+    @model_type = ModelType.find(params[:id])
+    @transport_model = TransportModel.find(params[:id])
+    @model_type.active!
+    redirect_to transport_model_path(@transport_model)
+  end
+
+  def inactive
+    @model_type = ModelType.find(params[:id])
+    @transport_model = TransportModel.find(params[:id])
+    @model_type.inactive!
+    redirect_to transport_model_path(@transport_model)
+  end
+
   private
 
   def model_type_params
