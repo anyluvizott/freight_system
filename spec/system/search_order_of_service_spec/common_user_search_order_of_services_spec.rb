@@ -163,4 +163,24 @@ describe 'Usuário Comum faz uma busca' do
     expect(page).not_to have_content 'Entrega foi realizada dentro do prazo'
 
   end
+
+  it 'deixando o campo da busca vazio' do
+    visit root_path
+
+    fill_in 'Buscar Entrega',	with: nil
+    click_on 'Buscar'
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'A busca não pode ser vazia'
+  end
+
+  it 'com um código inválido' do
+    visit root_path
+
+    fill_in 'Buscar Entrega',	with: 'ABCDEFG'
+    click_on 'Buscar'
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'A busca não é válida'
+  end
 end

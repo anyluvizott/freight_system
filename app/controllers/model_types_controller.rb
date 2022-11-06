@@ -41,14 +41,14 @@ class ModelTypesController < ApplicationController
 
   def active
     @model_type = ModelType.find(params[:id])
-    @transport_model = TransportModel.find(params[:id])
+    @transport_model = TransportModel.find(@model_type.transport_model_id)
     @model_type.active!
     redirect_to transport_model_path(@transport_model)
   end
 
   def inactive
     @model_type = ModelType.find(params[:id])
-    @transport_model = TransportModel.find(params[:id])
+    @transport_model = TransportModel.find(@model_type.transport_model_id)
     @model_type.inactive!
     redirect_to transport_model_path(@transport_model)
   end
