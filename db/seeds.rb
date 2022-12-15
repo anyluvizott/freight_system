@@ -15,6 +15,37 @@ transport_three = TransportModel.create!(name: 'Rodoviário - Motocicleta', mini
 
 transport_four = TransportModel.create!(name: 'Rodoviário - Bicicleta', minimum_distance: 1, maximum_distance: 15,
                                         minimum_weight: 1, maximum_weight: 40, tax: 10)
+                                        
+# Criando Modalidades de Entrega
+model_type = ModelType.create!(name: 'Entrega Padrão', starting_km: 1, final_km: 15, deadline: 48, price: 0,
+  transport_model: transport_four)
+
+model_type_one= ModelType.create!(name: 'Entrega Expressa', starting_km: 1, final_km: 15, deadline: 24, price: 15,
+  transport_model: transport_four)
+
+model_type_two = ModelType.create!(name: 'Entrega Super Expressa', starting_km: 1, final_km: 15, deadline: 12, price: 25,
+  transport_model: transport_four)
+
+model_type_three = ModelType.create!(name: 'Entrega Padrão', starting_km: 10, final_km: 200, deadline: 96, price: 0,
+    transport_model: transport_three)
+
+model_type_four = ModelType.create!(name: 'Entrega Expressa', starting_km: 10, final_km: 200, deadline: 48, price: 25,
+    transport_model: transport_three)
+
+model_type_five= ModelType.create!(name: 'Entrega Super Expressa', starting_km: 10, final_km: 200, deadline: 24, price: 50,
+    transport_model: transport_three)
+
+model_type_six = ModelType.create!(name: 'Entrega Padrão', starting_km: 20, final_km: 500, deadline: 120, price: 0,
+   transport_model: transport_two)
+
+model_type_seven = ModelType.create!(name: 'Entrega Expressa', starting_km: 20, final_km: 500, deadline: 96, price: 50,
+   transport_model: transport_two)
+
+model_type_eight = ModelType.create!(name: 'Entrega Padrão', starting_km: 100, final_km: 1000, deadline: 240, price: 0,
+   transport_model: transport_one)
+
+model_type_nine = ModelType.create!(name: 'Entrega Expressa', starting_km: 100, final_km: 1000, deadline: 120, price: 100,
+   transport_model: transport_one)
 
 # Criando alguns veículos de exemplo:
 truck = Carrier.create!(drivers_name: 'Fernando Mendes', nameplate: 'BCG5L88',
@@ -58,7 +89,7 @@ order_one = OrderOfService.create!(full_sender_address: 'Recanto Nerd do Rafael 
                                    product_length: 25, product_width: 20, product_height: 10,
                                    recipient_full_address: 'Rua das Banana, 241 - Curitiba PR', recipients_name: 'Nana Marrye',
                                    distance: 20, product_weight: 8, status: :on_route, delivery_date: 3.days.ago)
-start_order_one = StartServiceOrder.create!(order_of_service_id: 1, carrier_id: 9, delivery_type: 'expressa')
+start_order_one = StartServiceOrder.create!(order_of_service_id: 1, carrier_id: 9, model_type_id: 1)
 
 order_two = OrderOfService.create!(full_sender_address: 'Cantinho da Tia Anastácia - Rua Palmeiras do Havaí, 50 - Curitiba PR',
                                    product_length: 30, product_width: 20, product_height: 8,
@@ -94,7 +125,7 @@ order_eight = OrderOfService.create!(full_sender_address: 'Galpão Surf & Praia 
                                      product_length: 100, product_width: 100, product_height: 100,
                                      recipient_full_address: 'Rua das Formigas, 100 - Florianópolis SC', recipients_name: 'Joana Siqueira',
                                      distance: 315, product_weight: 500, status: :delivered, delivery_date: 10.days.ago, final_date: 1.day.ago, note: 'Acidente na estrada')
-start_order_eight = StartServiceOrder.create!(order_of_service_id: 8, carrier_id: 1, delivery_type: 'comum')
+start_order_eight = StartServiceOrder.create!(order_of_service_id: 8, carrier_id: 1, model_type_id: 9)
 
 # Criando tabela de preço por peso:
 first_line = PriceByWeight.create!(starting_weight: 1, final_weight: 10, price_per_km: 0.50)
@@ -109,24 +140,3 @@ line_two = PricePerDistance.create!(starting_km: 51, final_km: 150, fixed_price:
 line_three = PricePerDistance.create!(starting_km: 151, final_km: 500, fixed_price: 20)
 line_four = PricePerDistance.create!(starting_km: 501, final_km: 1000, fixed_price: 25)
 
-# Criando tabela de prazo de entrega
-first_deadline = DeliveryTime.create!(starting_km: 1, final_km: 100, deadline: 48)
-second_deadline = DeliveryTime.create!(starting_km: 101, final_km: 300, deadline: 96)
-third_deadline = DeliveryTime.create!(starting_km: 301, final_km: 500, deadline: 120)
-fourth_deadline = DeliveryTime.create!(starting_km: 501, final_km: 1000, deadline: 240)
-
-# Criando Modalidades de Entrega
-model_type_one = ModelType.create!(name: 'Entrega Comum', starting_km: 1, final_km: 15, deadline: 48,
-                                   transport_model: transport_four)
-
-model_type_two = ModelType.create!(name: 'Entrega Expressa', starting_km: 1, final_km: 15, deadline: 24,
-                                   transport_model: transport_four)
-
-model_type_three = ModelType.create!(name: 'Entrega Comum', starting_km: 10, final_km: 200, deadline: 96,
-                                     transport_model: transport_three)
-
-model_type_four = ModelType.create!(name: 'Entrega Comum', starting_km: 20, final_km: 500, deadline: 120,
-                                    transport_model: transport_two)
-
-model_type_five = ModelType.create!(name: 'Entrega Comum', starting_km: 100, final_km: 1000, deadline: 240,
-                                    transport_model: transport_one)

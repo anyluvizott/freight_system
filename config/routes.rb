@@ -10,17 +10,13 @@ Rails.application.routes.draw do
     post 'under_maintenance', on: :member
     get 'search', on: :collection
   end
-
-  resources :price_by_weights, only: %i[index create edit update]
-  resources :price_per_distances, only: %i[index create edit update]
-
-  resources :delivery_times, only: %i[index create edit update]
   
+  resources :price_by_weights, only: %i[index create edit update]
+  resources :price_per_distances, only: %i[index create edit update]  
   resources :model_types, only: %i[show new create edit update] do
     post 'active', on: :member
     post 'inactive', on: :member
   end
-
 
   resources :order_of_services, only: %i[index show new create edit update] do
     resources :start_service_orders, only: [:create]

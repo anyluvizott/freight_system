@@ -62,4 +62,5 @@ class ModelTypesController < ApplicationController
   def restriction_for_regular_user
     redirect_to root_path, alert: 'Você não possui autorização para acessar essa página.' if current_user.regular?
   end
+
 end

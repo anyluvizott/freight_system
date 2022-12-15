@@ -8,10 +8,13 @@ class OrderOfServicesController < ApplicationController
     @order_of_service = OrderOfService.find(params[:id])
     @start_service_order = StartServiceOrder.new
     @transport_models = TransportModel.all
+    if !@order_of_service.pending?
+      @model_type = ModelType.find(@order_of_service.start_service_order.model_type_id)
+    end
     @carriers = select_carriers
+    @model_types = model_types
     @sum = sum
     @select_transport_model = select_transport_model
-    @deadline = deadline
     @timelimit = timelimit unless @order_of_service.final_date.nil?
     @carrier_start_service_order = carrier_start_service_order unless @order_of_service.start_service_order.nil?
   end
@@ -100,6 +103,14 @@ class OrderOfServicesController < ApplicationController
     select_carriers
   end
 
+  def model_types
+    model_type = []
+    @carriers.each do |tm|
+      model_type << tm.transport_model.model_types
+    end
+    model_type.flatten.uniq
+  end
+
   def select_transport_model
     transport = []
     transport_name = []
@@ -136,18 +147,9 @@ class OrderOfServicesController < ApplicationController
     price_by_weights + price_per_distances
   end
 
-  def deadline
-    deadline = 0
-    delivery_time = DeliveryTime.where('starting_km <= ?', @order_of_service.distance)
-
-    delivery_time.each do |dl|
-      deadline = dl.deadline if dl.final_km >= @order_of_service.distance
-    end
-    deadline
-  end
-
   def timelimit
     @order_of_service = OrderOfService.find(params[:id])
     timelimit = ((@order_of_service.final_date - @order_of_service.delivery_date) / 1.hour).to_i
   end
+
 end

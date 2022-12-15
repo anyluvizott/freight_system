@@ -26,4 +26,5 @@ class OrderOfService < ApplicationRecord
   def generate_product_code
     self.product_code = SecureRandom.alphanumeric(5).upcase
   end
+  
 end

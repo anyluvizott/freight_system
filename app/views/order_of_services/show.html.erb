@@ -1,11 +1,9 @@
 <hr/>
-<% if user_signed_in? %>
-  <% if current_user.admin? %>
-    <% if @order_of_service.pending? %>
-      <div>
-        <%= link_to 'Editar Ordem de Serviço', edit_order_of_service_path(@order_of_service), :class=>"link-dark"%>
-      </div>
-    <% end %>
+<% if current_user.admin? %>
+  <% if @order_of_service.pending? %>
+    <div>
+      <%= link_to 'Editar Ordem de Serviço', edit_order_of_service_path(@order_of_service), :class=>"link-dark"%>
+    </div>
   <% end %>
 <% end %>
 <h2>Ordem de Serviço - Código <%= @order_of_service.order_service_code %></h2>
@@ -30,152 +28,77 @@
 <div>
   <%= link_to 'Voltar', order_of_services_path, :class=>"link-dark" %>
 </div>
-<% if @order_of_service.delivered? %>
-  <h3> Ordem de Serviço Concluída! </h3>
-  <p> Data de Saída: <%= I18n.l(@order_of_service.delivery_date, format: "%d de %B de %Y") %> - Data de Entrega: <%= I18n.l(@order_of_service.final_date, format: "%d de %B de %Y") %> </h3>
-  <dt>Detalhes:</dt>
-  <% if @order_of_service.start_service_order.delivery_type == 'comum' %>
-    <dd> Entrega: Comum </dd>
-    <dd> Valor Total da Entrega: <%= number_to_currency(@carrier_start_service_order.transport_model.tax + @sum) %> </dd>
-    <dd> Prazo de Entrega: <%= @deadline %> horas</dd>
-    <% if @timelimit < @deadline %>
-      <h4>Entrega realizada dentro do prazo.</h4>
-    <% end %>
-    <% if @timelimit > @deadline %>
-      <h4>Entrega realizada com atraso.</h4>
-      <% if @order_of_service.note == nil %>
-        <p>Informe o motivo:</p>
-        <%= form_with(model: @order_of_service) do |f| %>
-          <div>
-            <%= f.label :note %>
-            <%= f.text_area :note %>
-            <%= f. submit 'Enviar', :class => "btn btn-outline-dark"%>
-          </div>
-        <% end %>
-      <% else %>
-        <%= @order_of_service.note %>
-      <% end %>
+<hr/>
+
+<% if @order_of_service.pending? %>
+<section id="start_service_orders">
+  <h2>Realizar Entrega</h2>
+  <% @select_transport_model.each do |tp| %>
+    <dt>
+      <h4><strong><%= tp.transport_model.name %>:</strong></h4>
+    </dt>
+    <% tp.transport_model.model_types.each do |model| %>
+      <dd><strong><%= model.name %>:</strong> <%= model.deadline %> horas - <%= number_to_currency(model.price + tp.transport_model.tax + @sum) %></dd>
     <% end %>
   <% end %>
-  <% if @order_of_service.start_service_order.delivery_type == 'expressa' %>
-    <dd> Entrega: Expressa </dd>
-    <dd> Valor Total da Entrega: <%= number_to_currency((@carrier_start_service_order.transport_model.tax + @sum)*1.25) %> </dd>
-    <dd> Prazo de Entrega: <%= (@deadline * 0.75).to_i %> horas</dd>
-    <% if @timelimit < (@deadline*0.75).to_i %>
-      <h4>Entrega realizada dentro do prazo.</h4>
+  <hr/>
+  <% if !@carriers.empty? %>
+    <%= form_with(model: [@order_of_service, @start_service_order]) do |f| %>
+      <div>
+        <%= f.label(:carrier_id, 'Veículos para Entrega') %>
+        <%= f.collection_select(:carrier_id, @carriers, :id, :description_carrier) %>
+        <br/>
+        <%= f.label(:model_type_id, 'Tipo de Entrega') %>
+        <%= f.collection_select(:model_type_id, @model_types, :id, :name) %>
+        <%= f.submit 'Confirmar Entrega', :class => "btn btn-outline-dark"%>
+      </div>
     <% end %>
-    <% if @timelimit > (@deadline*0.75).to_i  %>
-      <h4>Entrega realizada com atraso.</h4>
-      <% if @order_of_service.note == nil %>
-        <p>Informe o motivo:</p>
-        <%= form_with(model: @order_of_service) do |f| %>
-          <div>
-            <%= f.label :note %>
-            <%= f.text_area :note %>
-            <%= f. submit 'Enviar', :class => "btn btn-outline-dark"%>
-          </div>
-        <% end %>
-      <% else %>
-        <%= @order_of_service.note %>
-      <% end %>
-    <% end %>
+  <% else %>
+    <p> Não há veículos para essa Ordem de Serviço </p>
   <% end %>
-  <% if @order_of_service.start_service_order.delivery_type == 'super_expressa' %>
-    <dd> Entrega: Super Expressa </dd>
-    <dd> Valor Total da Entrega: <%= number_to_currency((@carrier_start_service_order.transport_model.tax + @sum)*1.50) %></dd>
-    <dd> Prazo de Entrega: <%= (@deadline * 0.50).to_i %> horas</dd>
-    <% if @timelimit < (@deadline * 0.50).to_i %>
-      <h4>Entrega realizada dentro do prazo.</h4>
-    <% end %>
-    <% if @timelimit > (@deadline * 0.50).to_i %>
-      <h4>Entrega realizada com atraso.</h4>
-      <% if @order_of_service.note == nil %>
-        <p>Informe o motivo:</p>
-        <%= form_with(model: @order_of_service) do |f| %>
-          <div>
-            <%= f.label :note %>
-            <%= f.text_area :note %>
-            <%= f. submit 'Enviar', :class => "btn btn-outline-dark"%>
-          </div>
-        <% end %>
-      <% else %>
-        <%= @order_of_service.note %>
-      <% end %>
-    <% end %>
-  <% end %>
-<% else %>
-  <% if @order_of_service.on_route? %>
+</section>
+<% end %>
+
+<% if @order_of_service.on_route? %>
     <h3> Ordem de Serviço já está em rota de entrega!</h3>
     <p>Saída: <%= I18n.l(@order_of_service.delivery_date, format: "%d de %B de %Y") %></p>
     <dt>Detalhes:</dt>
-    <% if @order_of_service.start_service_order.delivery_type == 'comum' %>
-      <dd> Entrega: Comum </dd>
-      <dd> Valor Total da Entrega: <%= number_to_currency(@carrier_start_service_order.transport_model.tax + @sum) %> </dd>
-      <dd> Prazo de Entrega: <%= @deadline %> horas</dd>
-    <% end %>
-    <% if @order_of_service.start_service_order.delivery_type == 'expressa' %>
-      <dd> Entrega: Expressa </dd>
-      <dd> Valor Total da Entrega: <%= number_to_currency((@carrier_start_service_order.transport_model.tax + @sum)*1.25) %> </dd>
-      <dd> Prazo de Entrega: <%= (@deadline * 0.75).to_i %> horas</dd>
-    <% end %>
-    <% if @order_of_service.start_service_order.delivery_type == 'super_expressa' %>
-      <dd> Entrega: Super Expressa </dd>
-      <dd> Valor Total da Entrega: <%= number_to_currency((@carrier_start_service_order.transport_model.tax + @sum)*1.50) %></dd>
-      <dd> Prazo de Entrega: <%= (@deadline * 0.50).to_i %> horas</dd>
-    <% end %>
+
+      <dd> Entrega: <%= @model_type.name %></dd>
+      <dd> Valor Total da Entrega: <%= number_to_currency(@carrier_start_service_order.transport_model.tax + @sum + @model_type.price) %> </dd>
+      <dd> Prazo de Entrega: <%= @model_type.deadline %> horas</dd>
+
     <%= button_to 'Marcar como Entregue', delivered_order_of_service_path(@order_of_service.id), :class => "btn btn-outline-dark" %>
-  <% else %>
-    <section id="start_service_orders">
-      <h1>Realizar Entrega</h1>
-      <div>
-        <h3> Valor da Entrega </h3>
-        <table>
-          <tr>
-            <td>Modalidade de Entrega: </td>
-            <td>Entrega Comum: </td>
-            <td>Entrega Expressa: </td>
-            <td>Entrega Super Expressa: </td>
-          </tr>
-          <tr>
-            <td>Prazo de Entrega:</td>
-            <td><%= @deadline %> horas</td>
-            <td><%= (@deadline * 0.75).to_i %> horas</td>
-            <td><%= (@deadline * 0.50).to_i %> horas</td>
-          </tr>
-          <% @select_transport_model.each do |tp| %>
-            <tr>
-              <td><%= tp.transport_model.name %> </td>
-              <td><%= number_to_currency(tp.transport_model.tax + @sum) %> </td>
-              <td><%= number_to_currency((tp.transport_model.tax + @sum)*1.25) %> </td>
-              <td><%= number_to_currency((tp.transport_model.tax + @sum)*1.50) %> </td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
-      <br>
-      <% if !@carriers.empty? %>
-        <%= form_with(model: [@order_of_service, @start_service_order]) do |f| %>
+  <% end %>
+
+  <% if @order_of_service.delivered? %>
+  <h3> Ordem de Serviço Concluída! </h3>
+  <p> Data de Saída: <%= I18n.l(@order_of_service.delivery_date, format: "%d de %B de %Y") %> - Data de Entrega: <%= I18n.l(@order_of_service.final_date, format: "%d de %B de %Y") %> </h3>
+  <dt>Detalhes:</dt>
+
+    <dd> Entrega: <%= @model_type.name %></dd>
+    <dd> Valor Total da Entrega: <%= number_to_currency(@carrier_start_service_order.transport_model.tax + @sum + @model_type.price) %> </dd>
+    <dd> Prazo de Entrega: <%= @model_type.deadline %> horas </dd>
+
+    <% if @timelimit < @model_type.deadline %> 
+      <h4>Entrega realizada dentro do prazo.</h4>
+    <% end %>
+    <% if @timelimit > @model_type.deadline %>
+      <h4>Entrega realizada com atraso.</h4>
+      <% if @order_of_service.note == nil %>
+        <p>Informe o motivo:</p>
+        <%= form_with(model: @order_of_service) do |f| %>
           <div>
-            <%= f.label(:carrier_id, 'Veículos para Entrega' ) %>
-            <%= f.collection_select(:carrier_id, @carriers, :id, :description_carrier) %>
-            <br>
-            <%= f.label :delivery_type_comum, 'Entrega Comum' %>
-            <%= f.radio_button :delivery_type, :comum %>
-            <br>
-            <%= f.label :delivery_type_expressa, 'Entrega Expressa' %>
-            <%= f.radio_button :delivery_type, :expressa %>
-            <br>
-            <%= f.label :delivery_type_super_expressa, 'Entrega Super Expressa' %>
-            <%= f.radio_button :delivery_type, :super_expressa %>
-            <br>
-          </div>
-          <div>
-            <%= f.submit 'Confirmar Entrega', :class => "btn btn-outline-dark"%>
+            <%= f.label :note %>
+            <%= f.text_area :note %>
+            <%= f. submit 'Enviar', :class => "btn btn-outline-dark"%>
           </div>
         <% end %>
       <% else %>
-        <p> Não há veículos para essa Ordem de Serviço </p>
+        <%= @order_of_service.note %>
       <% end %>
-    </section>
+    <% end %>
   <% end %>
-<% end %>
+
+
+

@@ -8,7 +8,7 @@ class HomeController < ApplicationController
     else
       @order = OrderOfService.find_by('order_service_code LIKE ?', "%#{@search}%")
         if @order.nil?
-        redirect_to root_path, alert: 'A busca não é válida'
+          redirect_to root_path, alert: 'A busca não é válida'
         else
         unless @order.start_service_order.nil?
           carrier_id = @order.start_service_order.carrier_id
@@ -16,5 +16,5 @@ class HomeController < ApplicationController
         end
       end
     end
-  end  
+  end
 end

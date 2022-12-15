@@ -34,9 +34,6 @@
             <%= link_to 'Tabela de Preço por Distância', price_per_distances_path, :class => "nav-side-transport"  %>
           </li>
           <li>
-            <%= link_to 'Tabela de Prazo de Entrega', delivery_times_path, :class => "nav-side-transport"  %>
-          </li>
-          <li>
             <% if user_signed_in? %>
               <%= button_to 'Sair', destroy_user_session_path, method: :delete, :class => "fixed-bottom nav-side-transport login-logout" %>
             <% else %>

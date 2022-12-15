@@ -13,8 +13,6 @@ describe 'Usuário Regular inicia uma Ordem de Serviço' do
 
     PricePerDistance.create!(starting_km: 1, final_km: 50, fixed_price: 9)
 
-    DeliveryTime.create!(starting_km: 1, final_km: 100, deadline: 48)
-
     allow(SecureRandom).to receive(:alphanumeric).and_return('ABCDEFG12345678')
     order_one = OrderOfService.create!(full_sender_address: 'Galpão das Frutas Tropicais - Rua das Maçãs, 150 - Curitiba PR',
                                        product_length: 25, product_width: 17, product_height: 8,
@@ -92,8 +90,6 @@ describe 'Usuário Regular inicia uma Ordem de Serviço' do
     PriceByWeight.create!(starting_weight: 1, final_weight: 10, price_per_km: 0.50)
 
     PricePerDistance.create!(starting_km: 1, final_km: 50, fixed_price: 9)
-
-    DeliveryTime.create!(starting_km: 1, final_km: 100, deadline: 48)
 
     allow(SecureRandom).to receive(:alphanumeric).and_return('ABCDEFG12345678')
     order_one = OrderOfService.create!(full_sender_address: 'Galpão das Frutas Tropicais - Rua das Maçãs, 150 - Curitiba PR',
